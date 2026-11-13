@@ -28,7 +28,8 @@ function tabsOf(sel, onPick) {
 }
 tabsOf('.tabs [role=tab]', (n, t) => {
   $$('.tabs [role=tab]').forEach(b => { $('#' + b.getAttribute('aria-controls')).hidden = b !== t; });
-  if (!calm) gsap.from('#r' + n + ' li, #r' + n + ' .big', { y: 16, opacity: 0, duration: .5, stagger: .06, ease: 'power3.out' });
+  const pid = '#' + t.getAttribute('aria-controls');
+  if (!calm) gsap.from(pid + ' li, ' + pid + ' .big', { y: 16, opacity: 0, duration: .5, stagger: .06, ease: 'power3.out' });
 });
 
 const modes = {
