@@ -29,7 +29,7 @@ a{color:inherit}
 .skip:focus{top:12px}
 
 h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.05;letter-spacing:-.025em;text-wrap:balance}
-h1{font-size:clamp(2.6rem,5.3vw,5.6rem)}
+h1{font-size:clamp(2.6rem,4.6vw,5rem)}
 h2{font-size:clamp(2rem,4.3vw,3.5rem)}
 h3{font-size:1.3rem;font-weight:700;letter-spacing:-.01em}
 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
@@ -59,7 +59,7 @@ h3{font-size:1.3rem;font-weight:700;letter-spacing:-.01em}
 .burger[aria-expanded=true] i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
 
 /* hero */
-.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:center;padding:110px var(--edge) 56px;overflow:hidden;background:linear-gradient(165deg,var(--f950) 45%,var(--f900))}
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:minmax(0,4.6fr) minmax(0,6.4fr);gap:clamp(24px,3.5vw,56px);align-items:center;padding:110px var(--edge) 56px;overflow:hidden;background:linear-gradient(165deg,var(--f950) 45%,var(--f900))}
 .hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
 .hero>*{position:relative;z-index:1}
