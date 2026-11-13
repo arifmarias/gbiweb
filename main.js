@@ -96,7 +96,15 @@ function play(i) {
 }
 if (calm) still(demos[0]); else play(0);
 
-if (calm) return;
+/* the race: each lane takes progress p (0..1) */
+function lane(el, p) {
+  const items = $$('li', el), n = items.length;
+  el.style.setProperty('--p', p);
+  items.forEach((li, i) => li.classList.toggle('done', p >= i / (n - 1) - .001));
+  el.classList.toggle('end', p >= .999);
+  $('.clock', el).textContent = p >= .999 ? el.dataset.end : p > .02 ? el.dataset.mid : el.dataset.start;
+}
+if (calm) { $$('.lane').forEach(l => lane(l, 1)); return; }
 
 /* motion */
 gsap.registerPlugin(ScrollTrigger);
@@ -115,11 +123,13 @@ $$('[data-split]').slice(1).forEach(h => gsap.from(wordsOf(h), {
   scrollTrigger: { trigger: h, start: 'top 85%', once: true } }));
 
 const reveal = (sel, vars = {}) => $$(sel).forEach(el => gsap.from(el, { y: 36, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, ...vars }));
-reveal('.sources'); reveal('.path'); reveal('.tabs, .tabpanel'); reveal('.qa details', { y: 20 }); reveal('.flow'); reveal('.offices button', { y: 20 }); reveal('.mapbox');
+reveal('.sources');reveal('.tabs, .tabpanel'); reveal('.qa details', { y: 20 }); reveal('.flow'); reveal('.offices button', { y: 20 }); reveal('.mapbox');
 gsap.from('.bento .card', { y: 40, opacity: 0, duration: .8, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%', once: true } });
 gsap.from('.rows li', { y: 24, opacity: 0, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.rows', start: 'top 85%', once: true } });
-// "With GBI" path draws shorter: the before steps slide in one by one
-gsap.from('.before li', { opacity: 0, x: -16, duration: .5, stagger: .1, scrollTrigger: { trigger: '.gap .paths', start: 'top 80%', once: true } });
+// the race: scroll scrubs the slow route, the direct route finishes as it enters
+const [A, B] = $$('.lane');
+ScrollTrigger.create({ trigger: '#race', start: 'top 80%', end: 'bottom 55%', onUpdate: s => lane(A, s.progress) });
+ScrollTrigger.create({ trigger: '#race', start: 'top 80%', once: true, onEnter: () => { const o = { p: 0 }; gsap.to(o, { p: 1, duration: 1, ease: 'power3.out', delay: .25, onUpdate: () => lane(B, o.p) }); } });
 
 /* how it works: pinned on desktop, timed on small screens */
 const steps = $$('#steps li'), panels = $$('.panel'), dots = $$('.dots i');

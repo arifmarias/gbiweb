@@ -73,17 +73,18 @@
 <!-- GAP -->
 <section class="paper gap" id="gap">
   <h2 data-split>Decisions should not wait in a data team’s queue.</h2>
-  <div class="paths">
-    <div class="path before" aria-label="Without GBI">
-      <h3>Without GBI</h3>
-      <ol>
-        <li>Question</li><li>Ticket</li><li>Analyst queue</li><li>SQL</li><li>Spreadsheet</li><li>Slide</li><li>Answer, days later</li>
+  <p class="gap-sub">Same question. Same database. Scroll to watch the two routes.</p>
+  <div class="race" id="race">
+    <div class="lane before" data-start="Waiting" data-mid="Still waiting" data-end="Days later">
+      <div class="lane-h"><h3>Without GBI</h3><span class="clock" aria-hidden="true">Waiting</span></div>
+      <ol class="track">
+        <li>Question</li><li>Ticket</li><li>Analyst queue</li><li>SQL</li><li>Spreadsheet</li><li>Slide</li><li>Answer</li>
       </ol>
     </div>
-    <div class="path after" aria-label="With GBI">
-      <h3>With GBI</h3>
-      <ol>
-        <li>Question</li><li>Answer, while you are still looking at the screen</li>
+    <div class="lane after" data-start="Ready" data-mid="On its way" data-end="Now">
+      <div class="lane-h"><h3>With GBI</h3><span class="clock" aria-hidden="true">Ready</span></div>
+      <ol class="track">
+        <li>Question</li><li>Answer</li>
       </ol>
     </div>
   </div>
