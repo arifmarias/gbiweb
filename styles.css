@@ -241,9 +241,9 @@ details p{padding:0 40px 24px 0;color:var(--ink2);max-width:46em}
 .office:hover{background:rgba(220,184,114,.05);padding-inline:14px}
 .where b{display:block;font:500 clamp(1.5rem,2.4vw,2rem)/1.1 var(--display);letter-spacing:-.02em}
 .where em{display:block;margin-top:4px;font-style:normal;color:var(--on-dark2);font-size:.95rem}
-.local{font:500 .85rem var(--mono);color:var(--brass);white-space:nowrap}
-.local:empty{display:none}
-.local::after{content:" local";color:var(--on-dark2)}
+.otime{font:500 .85rem var(--mono);color:var(--brass);white-space:nowrap}
+.otime:empty{display:none}
+.otime::after{content:" local";color:var(--on-dark2)}
 /* flag on a pole: the flag flutters in 3D, a sheen sweeps across it */
 .pole{position:relative;display:block;padding-left:5px;width:50px;height:36px}
 .pole::before{content:"";position:absolute;left:0;top:-2px;width:2px;height:40px;border-radius:1px;background:var(--brass)}
@@ -288,7 +288,7 @@ details p{padding:0 40px 24px 0;color:var(--ink2);max-width:46em}
   .node:not(:last-child)::after{left:50%;top:100%;width:1px;height:26px}
   .flow.hosted .perimeter{width:100%;bottom:auto;height:calc(66.67% - 8px)}
   .office{grid-template-columns:auto 1fr;gap:18px}
-  .local{grid-column:2}
+  .otime{grid-column:2}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}

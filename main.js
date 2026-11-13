@@ -43,7 +43,7 @@ tabsOf('.seg [role=tab]', (n, t) => {
 });
 
 /* local time at each office */
-const clocks = $$('.local');
+const clocks = $$('.otime');
 const tick = () => clocks.forEach(c => { c.textContent = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: c.dataset.tz }); });
 tick(); setInterval(tick, 30000);
 
