@@ -44,7 +44,7 @@
 <section class="hero" id="top">
   <div class="hero-copy">
     <h1 data-split>Ask your data. | Keep your data.</h1>
-    <p class="lead">GBI gives executives plain-language answers from the company database: a sentence, the table, a chart and the steps behind it. It runs on the model you choose, including one inside your own network.</p>
+    <p class="lead">GBI answers executives in plain language, with every figure read straight from your own database and the steps behind it on show. It runs on the model you choose, including one inside your own network.</p>
     <div class="cta-row">
       <a class="btn magnetic" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request early access</a>
       <a class="btn btn-ghost" href="#how">See how it works</a>
@@ -246,21 +246,48 @@
 <!-- TRUST -->
 <section class="trust" id="trust">
   <div class="trust-in">
-    <h2 data-split>Built so the answer can be trusted.</h2>
-    <ul class="rows">
-      <li><b>Your data stays yours</b><span>run it on your own machines. With a local model, questions and data stay inside your network.</span></li>
-      <li><b>Identity from the session</b><span>never from the question. People cannot ask their way past their access.</span></li>
-      <li><b>Row limits and timeouts</b><span>on every query, set in the connector or the database user.</span></li>
-      <li><b>Any dialect, any domain</b><span>GBI learns your schema and terms. Nothing is tuned to one industry or one database.</span></li>
-      <li><b>Measured before release</b><span>a quality lab scores GBI against golden questions before each release.</span></li>
-    </ul>
+    <div class="trust-copy">
+      <h2 data-split>Every number has a receipt.</h2>
+      <p>The figures in an answer are not written from memory. Each one is read from a query that ran on your own data source, and it carries the tables, the filters and the access rules behind it. A board member can ask where a number came from, and the answer is one click away.</p>
+      <p class="hint">Click a figure to see its receipt.</p>
+      <div class="said" id="said">
+        Retail is <button type="button" class="fig" aria-pressed="true" data-r="0">14.2%</button> above plan, ahead of Wholesale at <button type="button" class="fig" aria-pressed="false" data-r="1">9.8%</button>. Online is on plan at <button type="button" class="fig" aria-pressed="false" data-r="2">0.2%</button>.
+      </div>
+    </div>
+    <div class="receipt-wrap" id="receipt" aria-live="polite">
+      <div class="receipt">
+        <p class="rl">Receipt · where this number came from</p>
+        <p class="rbig"><b id="rv">14.2%</b><span id="rk">Retail against plan, this quarter</span></p>
+        <dl class="rrows">
+          <div><dt>Source</dt><dd id="rsrc">sales_orders, plan_targets</dd></div>
+          <div><dt>Filter</dt><dd id="rflt">this quarter · division = Retail</dd></div>
+          <div><dt>Rows read</dt><dd id="rrows">5</dd></div>
+          <div><dt>Access</dt><dd>Executive role · all divisions</dd></div>
+        </dl>
+        <pre class="rsql" id="rsql" aria-label="SQL that produced this figure">SELECT d.name, 100 * (SUM(s.amount) / p.target - 1) AS vs_plan
+FROM sales_orders s JOIN plan_targets p ON p.division_id = s.division_id
+WHERE s.quarter = 'this' AND d.name = 'Retail'
+GROUP BY d.name, p.target</pre>
+        <p class="rnote">Analysts and admins can open and edit this SQL.</p>
+      </div>
+      <div class="zig" aria-hidden="true"></div>
+    </div>
   </div>
+  <ul class="rows">
+    <li><b>Straight from your source</b><span>every figure comes from a query on your own database, with the tables and filters shown beside it.</span></li>
+    <li><b>Your data stays yours</b><span>run it on your own machines. With a local model, questions and data stay inside your network.</span></li>
+    <li><b>Identity from the session</b><span>never from the question. People cannot ask their way past their access.</span></li>
+    <li><b>Row limits and timeouts</b><span>on every query, set in the connector or the database user.</span></li>
+    <li><b>Any dialect, any domain</b><span>GBI learns your schema and terms. Nothing is tuned to one industry or one database.</span></li>
+    <li><b>Measured before release</b><span>a quality lab scores GBI against golden questions before each release.</span></li>
+  </ul>
 </section>
 
 <!-- FAQ -->
 <section class="paper faq" id="faq">
   <h2>Questions executives ask first</h2>
   <div class="qa">
+    <details><summary>How do I know the numbers are right?</summary><p>Each figure comes from a query run on your own data source, not from a model’s memory. Every answer shows the tables and filters it used, and analysts can open the SQL. Each answer also carries a confidence label, and GBI is scored against golden questions before every release.</p></details>
     <details><summary>Does my data go to an AI provider?</summary><p>Only if the admin chooses a hosted model. With a local model, questions, schema and results stay inside your network. With a hosted model, that provider receives what the model needs to answer, under your own API key.</p></details>
     <details><summary>Which models can GBI use?</summary><p>Any the admin adds: open models run locally through Ollama, or hosted ones such as Anthropic, OpenAI and Gemini. You can switch later without rebuilding anything.</p></details>
     <details><summary>Which databases does it connect to?</summary><p>Oracle, SQL Server, MySQL, Databricks Unity Catalog, Snowflake and others. GBI takes the SQL dialect from the data source.</p></details>

@@ -47,6 +47,19 @@ const clocks = $$('.otime');
 const tick = () => clocks.forEach(c => { c.textContent = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: c.dataset.tz }); });
 tick(); setInterval(tick, 30000);
 
+/* trust: click a figure, see its receipt */
+const RC = ['Retail', 'Wholesale', 'Online'].map((name, i) => ({
+  name, v: ['14.2%', '9.8%', '0.2%'][i], k: `${name} against plan, this quarter`,
+  flt: `this quarter · division = ${name}`,
+  sql: `SELECT d.name, 100 * (SUM(s.amount) / p.target - 1) AS vs_plan\nFROM sales_orders s JOIN plan_targets p ON p.division_id = s.division_id\nWHERE s.quarter = 'this' AND d.name = '${name}'\nGROUP BY d.name, p.target`
+}));
+$$('.fig').forEach((b, i) => b.addEventListener('click', () => {
+  $$('.fig').forEach(f => f.setAttribute('aria-pressed', f === b));
+  const r = RC[i];
+  $('#rv').textContent = r.v; $('#rk').textContent = r.k; $('#rflt').textContent = r.flt; $('#rsql').textContent = r.sql;
+  if (!calm) gsap.fromTo('.receipt > *:not(.rl)', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .35, stagger: .05, ease: 'power2.out', overwrite: true });
+}));
+
 /* spotlight cards */
 $$('.spot').forEach(c => c.addEventListener('pointermove', e => {
   const r = c.getBoundingClientRect();
