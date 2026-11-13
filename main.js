@@ -268,13 +268,15 @@ ScrollTrigger.create({ trigger: '#fx3', start: 'top 80%', end: 'bottom 10%', onT
   clearInterval(fxTimer);
   if (s.isActive && !fxUser) fxTimer = setInterval(() => { if (fxUser) clearInterval(fxTimer); else fx3(fxRole === 'exec' ? 'reg' : 'exec', true); }, 3800);
 } });
-// 4: dashboard tiles and a schedule, then an alert arrives
+// 4: the dashboard appears once and stays; only the alert comes and goes
+gsap.from('#fx4 .fx-tiles div, #fx4 .fx-list li', { opacity: 0, y: 14, duration: .5, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '#fx4', start: 'top 80%', once: true } });
+gsap.from('#fx4 .spark path', { strokeDasharray: 200, strokeDashoffset: 200, duration: 1.2, ease: 'power2.out', scrollTrigger: { trigger: '#fx4', start: 'top 80%', once: true } });
 const fx4 = gsap.timeline({ repeat: -1, paused: true });
 fx4.set('#fx4t', { opacity: 0, y: 14 })
-  .from('#fx4 .fx-tiles div, #fx4 .fx-list li', { opacity: 0, y: 12, duration: .45, stagger: .1, ease: 'power3.out' })
-  .to('#fx4t', { opacity: 1, y: 0, duration: .5, ease: 'back.out(1.6)' }, '+=.4')
-  .to({}, { duration: 2.6 })
-  .to('#fx4t', { opacity: 0, y: 14, duration: .3 });
+  .to('#fx4t', { opacity: 1, y: 0, duration: .5, ease: 'back.out(1.6)' }, '+=1.2')
+  .to({}, { duration: 2.8 })
+  .to('#fx4t', { opacity: 0, y: 14, duration: .3 })
+  .to({}, { duration: .8 });
 fxLoop('#fx4', fx4);
 gsap.from('.rows li', { y: 24, opacity: 0, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.rows', start: 'top 85%', once: true } });
 // the race: scroll scrubs the slow route, the direct route finishes as it enters
@@ -294,7 +296,7 @@ const set = n => {
 steps.forEach((s, i) => s.addEventListener('click', () => set(i)));
 ScrollTrigger.matchMedia({
   '(min-width:1001px)': () => ScrollTrigger.create({
-    trigger: '.how-pin', start: 'top top', end: '+=1500', pin: true,
+    trigger: '.how-pin', start: 'top top', end: '+=1500', pin: true, refreshPriority: 1,
     onUpdate: s => set(Math.min(2, Math.floor(s.progress * 3)))
   }),
   '(max-width:1000px)': () => {

@@ -268,8 +268,12 @@ h3{font-size:1.3rem;font-weight:700;letter-spacing:-.01em}
 .fx-row.lock .t i{transform:scaleX(0)}
 .fx-note{font:.76rem var(--mono);color:var(--mint);min-height:1.4em}
 .fx-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.fx-tiles div{padding:12px 14px;border-radius:12px;border:1px solid rgba(238,245,239,.12);background:rgba(238,245,239,.04)}
-.fx-tiles b{display:block;font:700 1.5rem/1.2 var(--display);letter-spacing:-.02em}
+.fx-tiles div{padding:14px 16px 12px;border-radius:12px;border:1px solid rgba(238,245,239,.22);background:rgba(238,245,239,.08)}
+.fx-tiles b{display:block;margin-top:2px;font:700 2.2rem/1.1 var(--display);letter-spacing:-.03em;color:var(--on-dark)}
+.fx-tiles b.hot{color:var(--brass)}
+.fx-tiles em{display:block;margin-top:2px;font:500 .72rem var(--mono);font-style:normal;color:var(--mint)}
+.spark{display:block;width:100%;height:26px;margin-top:8px;overflow:visible}
+.spark path{fill:none;stroke:var(--mint);stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:.85}
 .fx-list{list-style:none;padding:0;display:grid;gap:8px}
 .fx-list li{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:10px;border:1px solid rgba(238,245,239,.1);font-size:.9rem}
 .fx-list em{font:normal .72rem var(--mono);color:var(--mint);white-space:nowrap}
