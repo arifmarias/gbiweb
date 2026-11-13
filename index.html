@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GBI — Ask your data in plain words</title>
+<meta name="description" content="GBI (Generative BI) turns a business question into a checked answer: a sentence, the table, a chart and the steps behind it. No SQL, no ticket to the data team.">
+<meta name="theme-color" content="#0a1f1a">
+<link rel="canonical" href="https://gbi.chat/">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:title" content="GBI — Ask your data in plain words">
+<meta property="og:description" content="Generative BI for any business database. Plain-language questions, checked answers, access that follows the person.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gbi.chat/">
+<meta property="og:image" content="https://gbi.chat/assets/mark-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Schibsted+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="GBI home">
+    <img src="assets/mark-512.png" width="36" height="36" alt="">
+    <span>GBI</span>
+  </a>
+  <nav id="menu" aria-label="Main">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#roles">Who it is for</a>
+    <a href="#trust">Trust</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <a class="btn btn-sm" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request access</a>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
+</header>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <h1 data-split>Ask your data in plain words.</h1>
+    <p class="lead">GBI turns a business question into a checked answer: a sentence you can read, the table behind it, a chart, and the steps it took. No SQL. No ticket to the data team.</p>
+    <div class="cta-row">
+      <a class="btn magnetic" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request early access</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+  </div>
+
+  <figure class="demo" aria-label="Example of GBI answering a question">
+    <div class="demo-bar"><i></i><i></i><i></i><span>GBI · Ask</span><em>Illustrative data</em></div>
+    <div class="demo-body">
+      <div class="q" id="dq"><span id="dqt"></span></div>
+      <div class="think" id="dthink"><span>Reading the business model…</span></div>
+      <p class="ans" id="dans"></p>
+      <div class="chart" id="dchart" role="img" aria-label="Bar chart of the answer"></div>
+      <div class="how" id="dhow"></div>
+    </div>
+  </figure>
+</section>
+
+<section class="sources" aria-label="Supported databases">
+  <p>Works with the database you already run</p>
+  <ul>
+    <li>Oracle</li><li>SQL Server</li><li>MySQL</li><li>Databricks Unity Catalog</li><li>Snowflake</li><li>and more</li>
+  </ul>
+</section>
+
+<!-- GAP -->
+<section class="paper gap" id="gap">
+  <h2 data-split>Every question used to wait for someone who knows SQL.</h2>
+  <div class="paths">
+    <div class="path before" aria-label="Without GBI">
+      <h3>Without GBI</h3>
+      <ol>
+        <li>Question</li><li>Ticket</li><li>Analyst queue</li><li>SQL</li><li>Spreadsheet</li><li>Slide</li><li>Answer, days later</li>
+      </ol>
+    </div>
+    <div class="path after" aria-label="With GBI">
+      <h3>With GBI</h3>
+      <ol>
+        <li>Question</li><li>Answer, while you are still looking at the screen</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how-sec" id="how">
+  <div class="how-pin">
+    <div class="how-left">
+      <h2>From database to answer in three moves.</h2>
+      <ol class="steps" id="steps">
+        <li class="on"><span class="n">01</span><div><h3>Connect</h3><p>Add a data source in the admin console. GBI reads the schemas and tables it is allowed to see.</p></div></li>
+        <li><span class="n">02</span><div><h3>Model</h3><p>GBI builds a business model from what it finds: what a customer is, what “active” means, how sales join to regions. You review and correct it. It stays current instead of being built once.</p></div></li>
+        <li><span class="n">03</span><div><h3>Ask</h3><p>People ask in their own language. GBI writes the SQL, runs it inside that person’s access, and answers in business terms.</p></div></li>
+      </ol>
+    </div>
+    <div class="how-right" aria-hidden="true">
+      <div class="panel on" data-p="0">
+        <div class="pl">Data sources</div>
+        <ul class="srcs">
+          <li><b>Oracle</b><span>finance_prod</span><i class="ok">Connected</i></li>
+          <li><b>SQL Server</b><span>operations</span><i class="ok">Connected</i></li>
+          <li><b>Snowflake</b><span>marketing_dw</span><i class="ok">Connected</i></li>
+          <li><b>MySQL</b><span>web_orders</span><i class="wait">Scanning</i></li>
+        </ul>
+      </div>
+      <div class="panel" data-p="1">
+        <div class="pl">Business model</div>
+        <svg viewBox="0 0 440 280" class="graph" role="presentation">
+          <g class="edges"><path d="M70 60C150 60 150 140 220 140"/><path d="M70 140H220"/><path d="M70 220C150 220 150 140 220 140"/><path d="M220 140C300 140 300 80 370 80"/><path d="M220 140C300 140 300 200 370 200"/></g>
+          <g class="raw"><rect x="10" y="44" width="110" height="32" rx="6"/><text x="22" y="64">TBL_CUST_01</text><rect x="10" y="124" width="110" height="32" rx="6"/><text x="22" y="144">ORD_HDR</text><rect x="10" y="204" width="110" height="32" rx="6"/><text x="22" y="224">GEO_DIM</text></g>
+          <g class="biz"><rect x="165" y="118" width="110" height="44" rx="22"/><text x="220" y="145" text-anchor="middle">Sales</text><rect x="320" y="64" width="110" height="32" rx="16"/><text x="375" y="85" text-anchor="middle">Customer</text><rect x="320" y="184" width="110" height="32" rx="16"/><text x="375" y="205" text-anchor="middle">Region</text></g>
+        </svg>
+        <p class="note">Technical names on the left, business terms on the right.</p>
+      </div>
+      <div class="panel" data-p="2">
+        <div class="pl">Ask</div>
+        <div class="mini-q">Show me last month’s returns by product line</div>
+        <div class="mini-a"><b>Returns fell 8% last month.</b> Outdoor leads with 412 returns; two lines account for half of them.</div>
+        <div class="mini-bars"><i style="--w:92%"></i><i style="--w:64%"></i><i style="--w:41%"></i><i style="--w:23%"></i></div>
+        <div class="mini-how">Tables: returns, products · Filter: last month</div>
+      </div>
+      <div class="dots"><i class="on"></i><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="paper feats" id="features">
+  <h2 data-split>Built for the people who read the answer, and the ones who have to defend it.</h2>
+  <div class="bento">
+    <article class="card c-wide spot">
+      <h3>Answers you can check</h3>
+      <p>Every answer carries “How I got this”: the tables used and the filters applied. Analysts and admins can open and edit the SQL.</p>
+      <div class="chips"><span>tables: orders, regions</span><span>filter: last quarter</span><span>rows: 12</span></div>
+    </article>
+    <article class="card spot">
+      <h3>Asks before it guesses</h3>
+      <p>A vague question gets a short clarifying question, such as which period you mean.</p>
+    </article>
+    <article class="card spot">
+      <h3>Access follows the person</h3>
+      <p>Row and column rules by role and attribute. A branch manager sees their branch. Identity comes from the session only.</p>
+    </article>
+    <article class="card c-wide spot">
+      <h3>A model that keeps learning</h3>
+      <p>Teach GBI a business term, metric or rule once and it applies to every question after. Answers people mark as good become verified examples.</p>
+    </article>
+    <article class="card spot">
+      <h3>Dashboards and exports</h3>
+      <p>Pin an answer to a personal or shared dashboard. Export to CSV or Excel. Share a link.</p>
+    </article>
+    <article class="card spot">
+      <h3>Your language</h3>
+      <p>Ask in any major language, Bangla included.</p>
+    </article>
+    <article class="card spot">
+      <h3>On WhatsApp too</h3>
+      <p>Admins switch on a WhatsApp channel so people can ask where they already chat.</p>
+    </article>
+    <article class="card c-wide spot">
+      <h3>Your choice of model</h3>
+      <p>Run a local model with Ollama so questions stay inside your network, or add a hosted model (Anthropic, OpenAI, Gemini and others) with your own key.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section class="roles" id="roles">
+  <h2>One product, three jobs.</h2>
+  <div class="tabs" role="tablist" aria-label="Roles">
+    <button role="tab" aria-selected="true" aria-controls="r0" id="t0">Business users</button>
+    <button role="tab" aria-selected="false" aria-controls="r1" id="t1" tabindex="-1">Analysts</button>
+    <button role="tab" aria-selected="false" aria-controls="r2" id="t2" tabindex="-1">Admins</button>
+  </div>
+  <div class="tabpanel" role="tabpanel" id="r0" aria-labelledby="t0">
+    <p class="big">Ask, trust the answer, get on with the decision.</p>
+    <ul><li>Starter questions for your role on the home screen</li><li>Type-ahead that uses your own business terms</li><li>One-click follow-ups: “break down by region”, “compare to last year”</li><li>Thumbs up or down on every answer</li></ul>
+  </div>
+  <div class="tabpanel" role="tabpanel" id="r1" aria-labelledby="t1" hidden>
+    <p class="big">Everything a business user has, plus the SQL.</p>
+    <ul><li>See and edit the SQL behind any answer</li><li>Run your own SQL through the governed query tool</li><li>Drill-down, statistics and forecasts</li><li>Save queries and views</li></ul>
+  </div>
+  <div class="tabpanel" role="tabpanel" id="r2" aria-labelledby="t2" hidden>
+    <p class="big">Run GBI for the whole organization, without writing code.</p>
+    <ul><li>Manage data sources, the business model and rules in one console</li><li>Set access by role and attribute</li><li>Add and switch models</li><li>Watch answer quality over time</li></ul>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust" id="trust">
+  <div class="trust-in">
+    <h2 data-split>Built so the answer can be trusted.</h2>
+    <ul class="rows">
+      <li><b>Row limits and timeouts</b><span>on every query, set in the connector or the database user.</span></li>
+      <li><b>Identity from the session</b><span>never from the question. People cannot ask their way past their access.</span></li>
+      <li><b>Any dialect, any domain</b><span>GBI learns your schema and terms. Nothing is tuned to one industry or one database.</span></li>
+      <li><b>Measured before release</b><span>a quality lab scores GBI against golden questions before each release.</span></li>
+      <li><b>Your infrastructure</b><span>run it on your own machines, with a local model if the data must not leave.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="paper faq" id="faq">
+  <h2>Questions people ask first</h2>
+  <div class="qa">
+    <details><summary>Do I need to know SQL?</summary><p>No. You write a question. Analysts and admins can open the SQL if they want to check or change it.</p></details>
+    <details><summary>Which databases does it connect to?</summary><p>Oracle, SQL Server, MySQL, Databricks Unity Catalog, Snowflake and others. GBI takes the SQL dialect from the data source.</p></details>
+    <details><summary>Does my data go to an AI provider?</summary><p>That is the admin’s choice. With a local model, questions and data stay inside your network. If the admin adds a hosted model, that provider receives what the model needs to answer.</p></details>
+    <details><summary>Can two people see different answers to the same question?</summary><p>Yes, when their access differs. Row and column rules apply to each person, so a regional manager and a finance lead see what each is allowed to see.</p></details>
+    <details><summary>Is GBI available today?</summary><p>GBI is in early access. Request access and we will reach out about a first set-up on your own data.</p></details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="final">
+  <h2 data-split>Bring a question your team is still waiting on.</h2>
+  <a class="btn btn-lg magnetic" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request early access</a>
+</section>
+</main>
+
+<footer class="foot">
+  <a class="brand" href="#top"><img src="assets/mark-512.png" width="28" height="28" alt=""><span>GBI · Generative BI</span></a>
+  <span>© 2026 GBI · gbi.chat</span>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
