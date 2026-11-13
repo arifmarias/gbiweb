@@ -251,17 +251,24 @@
       <h2 data-split>Bring a question your team is still waiting on.</h2>
       <p>Tell us which database and which question. We will arrange a first session on your own data.</p>
       <a class="btn btn-lg magnetic" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request early access</a>
-      <div class="offices" role="tablist" aria-label="Offices">
-        <button role="tab" aria-selected="true" id="o0" aria-controls="mapbox" data-lat="1.3329" data-lon="103.7427"><span>Singapore</span><em>International Business Park (IBP)</em></button>
-        <button role="tab" aria-selected="false" id="o1" aria-controls="mapbox" tabindex="-1" data-lat="2.9213" data-lon="101.6559"><span>Malaysia</span><em>Cyberjaya</em></button>
-        <button role="tab" aria-selected="false" id="o2" aria-controls="mapbox" tabindex="-1" data-lat="34.2011" data-lon="-118.5361"><span>USA</span><em>Reseda, California</em></button>
-      </div>
     </div>
-    <div class="mapbox" id="mapbox" role="tabpanel" aria-labelledby="o0">
-      <iframe id="map" title="Map of the selected office area" loading="lazy" referrerpolicy="no-referrer"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=103.7127%2C1.3029%2C103.7727%2C1.3629&amp;layer=mapnik&amp;marker=1.3329%2C103.7427"></iframe>
-      <a id="maplink" class="maplink" href="https://www.openstreetmap.org/?mlat=1.3329&amp;mlon=103.7427#map=14/1.3329/103.7427" target="_blank" rel="noopener">Open larger map</a>
-    </div>
+    <ul class="offices" aria-label="Offices">
+      <li class="office">
+        <span class="pole" aria-hidden="true"><span class="flag"><svg viewBox="0 0 30 20"><rect width="30" height="10" fill="#ee2536"/><rect y="10" width="30" height="10" fill="#fff"/><circle cx="7" cy="5" r="3.6" fill="#fff"/><circle cx="8.4" cy="5" r="3.3" fill="#ee2536"/><g fill="#fff"><circle cx="11.4" cy="2.3" r=".75"/><circle cx="13.6" cy="3.9" r=".75"/><circle cx="12.8" cy="6.5" r=".75"/><circle cx="10" cy="6.5" r=".75"/><circle cx="9.2" cy="3.9" r=".75"/></g></svg></span></span>
+        <div class="where"><b>Singapore</b><em>International Business Park (IBP)</em></div>
+        <time class="local" data-tz="Asia/Singapore"></time>
+      </li>
+      <li class="office">
+        <span class="pole" aria-hidden="true"><span class="flag"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><g fill="#cc0001"><rect y="0" width="30" height="1.43"/><rect y="2.86" width="30" height="1.43"/><rect y="5.71" width="30" height="1.43"/><rect y="8.57" width="30" height="1.43"/><rect y="11.43" width="30" height="1.43"/><rect y="14.29" width="30" height="1.43"/><rect y="17.14" width="30" height="1.43"/></g><rect width="15" height="10" fill="#010066"/><circle cx="5.6" cy="5" r="3.1" fill="#fc0"/><circle cx="6.5" cy="5" r="2.6" fill="#010066"/><polygon fill="#fc0" points="8.60,2.30 8.93,3.54 9.77,2.57 9.54,3.83 10.71,3.32 9.95,4.35 11.23,4.40 10.10,5.00 11.23,5.60 9.95,5.65 10.71,6.68 9.54,6.17 9.77,7.43 8.93,6.46 8.60,7.70 8.27,6.46 7.43,7.43 7.66,6.17 6.49,6.68 7.25,5.65 5.97,5.60 7.10,5.00 5.97,4.40 7.25,4.35 6.49,3.32 7.66,3.83 7.43,2.57 8.27,3.54"/></svg></span></span>
+        <div class="where"><b>Malaysia</b><em>Cyberjaya</em></div>
+        <time class="local" data-tz="Asia/Kuala_Lumpur"></time>
+      </li>
+      <li class="office">
+        <span class="pole" aria-hidden="true"><span class="flag"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><g fill="#b22234"><rect y="0" width="30" height="1.54"/><rect y="3.08" width="30" height="1.54"/><rect y="6.15" width="30" height="1.54"/><rect y="9.23" width="30" height="1.54"/><rect y="12.31" width="30" height="1.54"/><rect y="15.38" width="30" height="1.54"/><rect y="18.46" width="30" height="1.54"/></g><rect width="12" height="10.77" fill="#3c3b6e"/><g fill="#fff"><circle cx="2" cy="2" r=".6"/><circle cx="4.7" cy="2" r=".6"/><circle cx="7.4" cy="2" r=".6"/><circle cx="10" cy="2" r=".6"/><circle cx="3.3" cy="4.5" r=".6"/><circle cx="6" cy="4.5" r=".6"/><circle cx="8.7" cy="4.5" r=".6"/><circle cx="2" cy="7" r=".6"/><circle cx="4.7" cy="7" r=".6"/><circle cx="7.4" cy="7" r=".6"/><circle cx="10" cy="7" r=".6"/><circle cx="3.3" cy="9.2" r=".6"/><circle cx="6" cy="9.2" r=".6"/><circle cx="8.7" cy="9.2" r=".6"/></g></svg></span></span>
+        <div class="where"><b>USA</b><em>Reseda, California</em></div>
+        <time class="local" data-tz="America/Los_Angeles"></time>
+      </li>
+    </ul>
   </div>
 </section>
 </main>

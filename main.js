@@ -42,13 +42,10 @@ tabsOf('.seg [role=tab]', (n, t) => {
   $('#mkind').textContent = m.kind; $('#mname').textContent = m.name; $('#flowcap').textContent = m.cap;
 });
 
-const mapEl = $('#map');
-tabsOf('.offices [role=tab]', (n, t) => {
-  const lat = +t.dataset.lat, lon = +t.dataset.lon, dx = .03, dy = .018;
-  mapEl.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - dx}%2C${lat - dy}%2C${lon + dx}%2C${lat + dy}&layer=mapnik&marker=${lat}%2C${lon}`;
-  $('#maplink').href = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=14/${lat}/${lon}`;
-  $('#mapbox').setAttribute('aria-labelledby', t.id);
-});
+/* local time at each office */
+const clocks = $$('.local');
+const tick = () => clocks.forEach(c => { c.textContent = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: c.dataset.tz }); });
+tick(); setInterval(tick, 30000);
 
 /* spotlight cards */
 $$('.spot').forEach(c => c.addEventListener('pointermove', e => {
@@ -123,7 +120,7 @@ $$('[data-split]').slice(1).forEach(h => gsap.from(wordsOf(h), {
   scrollTrigger: { trigger: h, start: 'top 85%', once: true } }));
 
 const reveal = (sel, vars = {}) => $$(sel).forEach(el => gsap.from(el, { y: 36, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, ...vars }));
-reveal('.sources');reveal('.tabs, .tabpanel'); reveal('.qa details', { y: 20 }); reveal('.flow'); reveal('.offices button', { y: 20 }); reveal('.mapbox');
+reveal('.sources');reveal('.tabs, .tabpanel'); reveal('.qa details', { y: 20 }); reveal('.flow'); reveal('.office', { y: 20 });
 gsap.from('.bento .card', { y: 40, opacity: 0, duration: .8, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%', once: true } });
 gsap.from('.rows li', { y: 24, opacity: 0, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.rows', start: 'top 85%', once: true } });
 // the race: scroll scrubs the slow route, the direct route finishes as it enters
