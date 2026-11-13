@@ -14,22 +14,41 @@ burger.addEventListener('click', () => {
 });
 menu.addEventListener('click', e => { if (e.target.closest('a')) { burger.setAttribute('aria-expanded', false); menu.classList.remove('open'); } });
 
-/* tabs */
-const tabs = $$('[role=tab]');
-tabs.forEach((t, i) => {
-  t.addEventListener('click', () => pick(i));
-  t.addEventListener('keydown', e => {
-    const k = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (!k) return;
-    pick((i + k + tabs.length) % tabs.length); tabs[(i + k + tabs.length) % tabs.length].focus();
+/* tabs: roles, model mode, offices */
+function tabsOf(sel, onPick) {
+  const list = $$(sel);
+  const pick = n => { list.forEach((t, i) => { t.setAttribute('aria-selected', i === n); t.tabIndex = i === n ? 0 : -1; }); onPick(n, list[n]); };
+  list.forEach((t, i) => {
+    t.addEventListener('click', () => pick(i));
+    t.addEventListener('keydown', e => {
+      const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (!k) return;
+      e.preventDefault(); const j = (i + k + list.length) % list.length; pick(j); list[j].focus();
+    });
   });
-});
-function pick(n) {
-  tabs.forEach((t, i) => {
-    t.setAttribute('aria-selected', i === n); t.tabIndex = i === n ? 0 : -1;
-    $('#' + t.getAttribute('aria-controls')).hidden = i !== n;
-  });
-  if (!calm) gsap.from('#r' + n + ' li, #r' + n + ' .big', { y: 16, opacity: 0, duration: .5, stagger: .06, ease: 'power3.out' });
 }
+tabsOf('.tabs [role=tab]', (n, t) => {
+  $$('.tabs [role=tab]').forEach(b => { $('#' + b.getAttribute('aria-controls')).hidden = b !== t; });
+  if (!calm) gsap.from('#r' + n + ' li, #r' + n + ' .big', { y: 16, opacity: 0, duration: .5, stagger: .06, ease: 'power3.out' });
+});
+
+const modes = {
+  local: { kind: 'Local model', name: 'Open models via Ollama', cap: 'Questions, schema and results stay inside your network. The model runs on your own hardware.' },
+  hosted: { kind: 'Hosted model', name: 'Anthropic, OpenAI, Gemini and others', cap: 'Only what the model needs to answer goes to the provider you chose, under your own API key. The admin can switch it at any time.' }
+};
+tabsOf('.seg [role=tab]', (n, t) => {
+  const m = modes[t.dataset.mode], f = $('#flow');
+  f.classList.toggle('local', t.dataset.mode === 'local'); f.classList.toggle('hosted', t.dataset.mode === 'hosted');
+  f.setAttribute('aria-labelledby', t.id);
+  $('#mkind').textContent = m.kind; $('#mname').textContent = m.name; $('#flowcap').textContent = m.cap;
+});
+
+const mapEl = $('#map');
+tabsOf('.offices [role=tab]', (n, t) => {
+  const lat = +t.dataset.lat, lon = +t.dataset.lon, dx = .03, dy = .018;
+  mapEl.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - dx}%2C${lat - dy}%2C${lon + dx}%2C${lat + dy}&layer=mapnik&marker=${lat}%2C${lon}`;
+  $('#maplink').href = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=14/${lat}/${lon}`;
+  $('#mapbox').setAttribute('aria-labelledby', t.id);
+});
 
 /* spotlight cards */
 $$('.spot').forEach(c => c.addEventListener('pointermove', e => {
@@ -39,10 +58,10 @@ $$('.spot').forEach(c => c.addEventListener('pointermove', e => {
 
 /* demo */
 const demos = [
-  { q: 'Which regions grew fastest last quarter?',
-    bold: 'West grew fastest at 14.2%,', rest: 'ahead of North at 9.8%. South was flat.',
-    unit: '%', rows: [['West', 14.2], ['North', 9.8], ['East', 5.1], ['Central', 3.4], ['South', 0.2]],
-    how: ['How I got this', 'tables: sales_orders, regions', 'filter: last quarter, completed'] },
+  { q: 'Which divisions are furthest ahead of plan this quarter?',
+    bold: 'Retail leads at 14.2% above plan,', rest: 'ahead of Wholesale at 9.8%. Online is on plan.',
+    unit: '%', rows: [['Retail', 14.2], ['Wholesale', 9.8], ['Corporate', 5.1], ['Partners', 3.4], ['Online', 0.2]],
+    how: ['How I got this', 'tables: sales_orders, plan_targets', 'filter: this quarter, vs plan'] },
   { q: 'Where are claims taking longest to settle?',
     bold: 'Property claims take longest: 31 days on average,', rest: '9 more than motor. Liability is closing fastest.',
     unit: 'd', rows: [['Property', 31], ['Marine', 27], ['Health', 24], ['Motor', 22], ['Liability', 18]],
@@ -84,8 +103,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 // split headings into words
 $$('[data-split]').forEach(h => {
-  h.setAttribute('aria-label', h.textContent);
-  h.innerHTML = h.textContent.trim().split(/\s+/).map(w => `<span class="w" aria-hidden="true"><span>${w}</span></span>`).join(' ');
+  h.setAttribute('aria-label', h.textContent.replace(/\s*\|\s*/g, ' '));
+  h.innerHTML = h.textContent.trim().split(/\s+/).map(w => w === '|' ? '<br>' : `<span class="w" aria-hidden="true"><span>${w}</span></span>`).join(' ');
 });
 const wordsOf = h => $$('.w>span', h);
 gsap.from(wordsOf($('.hero h1')), { yPercent: 110, duration: 1, stagger: .07, ease: 'power4.out', delay: .1 });
@@ -96,7 +115,7 @@ $$('[data-split]').slice(1).forEach(h => gsap.from(wordsOf(h), {
   scrollTrigger: { trigger: h, start: 'top 85%', once: true } }));
 
 const reveal = (sel, vars = {}) => $$(sel).forEach(el => gsap.from(el, { y: 36, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, ...vars }));
-reveal('.sources'); reveal('.path'); reveal('.tabs, .tabpanel'); reveal('.qa details', { y: 20 }); reveal('.final .btn');
+reveal('.sources'); reveal('.path'); reveal('.tabs, .tabpanel'); reveal('.qa details', { y: 20 }); reveal('.flow'); reveal('.offices button', { y: 20 }); reveal('.mapbox');
 gsap.from('.bento .card', { y: 40, opacity: 0, duration: .8, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%', once: true } });
 gsap.from('.rows li', { y: 24, opacity: 0, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.rows', start: 'top 85%', once: true } });
 // "With GBI" path draws shorter: the before steps slide in one by one

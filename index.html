@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GBI — Ask your data in plain words</title>
-<meta name="description" content="GBI (Generative BI) turns a business question into a checked answer: a sentence, the table, a chart and the steps behind it. No SQL, no ticket to the data team.">
+<title>GBI — Ask your data. Keep your data.</title>
+<meta name="description" content="GBI (Generative BI) gives executives plain-language answers from the company database. Model agnostic: run a local model inside your own network, or a hosted one under your own key.">
 <meta name="theme-color" content="#0a1f1a">
 <link rel="canonical" href="https://gbi.chat/">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<meta property="og:title" content="GBI — Ask your data in plain words">
-<meta property="og:description" content="Generative BI for any business database. Plain-language questions, checked answers, access that follows the person.">
+<meta property="og:title" content="GBI — Ask your data. Keep your data.">
+<meta property="og:description" content="Executive answers from your own data, on the model you choose, including one inside your network.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gbi.chat/">
 <meta property="og:image" content="https://gbi.chat/assets/mark-512.png">
@@ -30,10 +30,10 @@
   </a>
   <nav id="menu" aria-label="Main">
     <a href="#how">How it works</a>
-    <a href="#features">Features</a>
+    <a href="#models">Any model</a>
     <a href="#roles">Who it is for</a>
     <a href="#trust">Trust</a>
-    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
   </nav>
   <a class="btn btn-sm" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request access</a>
   <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
@@ -43,8 +43,8 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-copy">
-    <h1 data-split>Ask your data in plain words.</h1>
-    <p class="lead">GBI turns a business question into a checked answer: a sentence you can read, the table behind it, a chart, and the steps it took. No SQL. No ticket to the data team.</p>
+    <h1 data-split>Ask your data. | Keep your data.</h1>
+    <p class="lead">GBI gives executives plain-language answers from the company database: a sentence, the table, a chart and the steps behind it. It runs on the model you choose, including one inside your own network.</p>
     <div class="cta-row">
       <a class="btn magnetic" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request early access</a>
       <a class="btn btn-ghost" href="#how">See how it works</a>
@@ -64,7 +64,7 @@
 </section>
 
 <section class="sources" aria-label="Supported databases">
-  <p>Works with the database you already run</p>
+  <p>Connects to the database you already run</p>
   <ul>
     <li>Oracle</li><li>SQL Server</li><li>MySQL</li><li>Databricks Unity Catalog</li><li>Snowflake</li><li>and more</li>
   </ul>
@@ -72,7 +72,7 @@
 
 <!-- GAP -->
 <section class="paper gap" id="gap">
-  <h2 data-split>Every question used to wait for someone who knows SQL.</h2>
+  <h2 data-split>Decisions should not wait in a data team’s queue.</h2>
   <div class="paths">
     <div class="path before" aria-label="Without GBI">
       <h3>Without GBI</h3>
@@ -96,7 +96,7 @@
       <h2>From database to answer in three moves.</h2>
       <ol class="steps" id="steps">
         <li class="on"><span class="n">01</span><div><h3>Connect</h3><p>Add a data source in the admin console. GBI reads the schemas and tables it is allowed to see.</p></div></li>
-        <li><span class="n">02</span><div><h3>Model</h3><p>GBI builds a business model from what it finds: what a customer is, what “active” means, how sales join to regions. You review and correct it. It stays current instead of being built once.</p></div></li>
+        <li><span class="n">02</span><div><h3>Model</h3><p>GBI builds a business model from what it finds: what a customer is, what “active” means, how sales join to regions. Your team reviews and corrects it. It stays current instead of being built once.</p></div></li>
         <li><span class="n">03</span><div><h3>Ask</h3><p>People ask in their own language. GBI writes the SQL, runs it inside that person’s access, and answers in business terms.</p></div></li>
       </ol>
     </div>
@@ -133,7 +133,7 @@
 
 <!-- FEATURES -->
 <section class="paper feats" id="features">
-  <h2 data-split>Built for the people who read the answer, and the ones who have to defend it.</h2>
+  <h2 data-split>Built for the executive who reads the answer, and the team who has to defend it.</h2>
   <div class="bento">
     <article class="card c-wide spot">
       <h3>Answers you can check</h3>
@@ -146,15 +146,15 @@
     </article>
     <article class="card spot">
       <h3>Access follows the person</h3>
-      <p>Row and column rules by role and attribute. A branch manager sees their branch. Identity comes from the session only.</p>
+      <p>Row and column rules by role and attribute. A regional head sees their region. Identity comes from the session only.</p>
     </article>
     <article class="card c-wide spot">
       <h3>A model that keeps learning</h3>
       <p>Teach GBI a business term, metric or rule once and it applies to every question after. Answers people mark as good become verified examples.</p>
     </article>
     <article class="card spot">
-      <h3>Dashboards and exports</h3>
-      <p>Pin an answer to a personal or shared dashboard. Export to CSV or Excel. Share a link.</p>
+      <h3>Reports and alerts</h3>
+      <p>Dashboards, scheduled reports and alerts for each department, built from answers people already trust.</p>
     </article>
     <article class="card spot">
       <h3>Your language</h3>
@@ -164,32 +164,55 @@
       <h3>On WhatsApp too</h3>
       <p>Admins switch on a WhatsApp channel so people can ask where they already chat.</p>
     </article>
-    <article class="card c-wide spot">
-      <h3>Your choice of model</h3>
-      <p>Run a local model with Ollama so questions stay inside your network, or add a hosted model (Anthropic, OpenAI, Gemini and others) with your own key.</p>
+    <article class="card spot">
+      <h3>Share what you find</h3>
+      <p>Send an answer as a link, export it to CSV or Excel, or pin it to a shared dashboard.</p>
     </article>
   </div>
 </section>
 
+<!-- MODELS -->
+<section class="models" id="models">
+  <div class="models-in">
+    <div class="models-copy">
+      <h2 data-split>Any model. Yours to choose, and to change.</h2>
+      <p>GBI is not tied to one AI provider. Run an open model on your own hardware so nothing leaves the building. Use a hosted model under your own key. Move from one to the other when your policy, your budget or the market changes.</p>
+      <div class="seg" role="tablist" aria-label="Where the model runs">
+        <button role="tab" aria-selected="true" data-mode="local" id="m0" aria-controls="flow">On your servers</button>
+        <button role="tab" aria-selected="false" data-mode="hosted" id="m1" aria-controls="flow" tabindex="-1">Hosted, your key</button>
+      </div>
+    </div>
+    <div class="flow local" id="flow" role="tabpanel" aria-labelledby="m0">
+      <div class="nodes">
+        <div class="perimeter"><span>Your network</span></div>
+        <div class="node"><small>Source</small><b>Your database</b></div>
+        <div class="node core"><small>Engine</small><b>GBI</b></div>
+        <div class="node model"><small id="mkind">Local model</small><b id="mname">Open models via Ollama</b></div>
+      </div>
+      <p class="flowcap" id="flowcap">Questions, schema and results stay inside your network. The model runs on your own hardware.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ROLES -->
-<section class="roles" id="roles">
-  <h2>One product, three jobs.</h2>
+<section class="paper roles" id="roles">
+  <h2>One product, three conversations.</h2>
   <div class="tabs" role="tablist" aria-label="Roles">
-    <button role="tab" aria-selected="true" aria-controls="r0" id="t0">Business users</button>
-    <button role="tab" aria-selected="false" aria-controls="r1" id="t1" tabindex="-1">Analysts</button>
-    <button role="tab" aria-selected="false" aria-controls="r2" id="t2" tabindex="-1">Admins</button>
+    <button role="tab" aria-selected="true" aria-controls="r0" id="t0">For executives</button>
+    <button role="tab" aria-selected="false" aria-controls="r1" id="t1" tabindex="-1">For data teams</button>
+    <button role="tab" aria-selected="false" aria-controls="r2" id="t2" tabindex="-1">For IT and security</button>
   </div>
   <div class="tabpanel" role="tabpanel" id="r0" aria-labelledby="t0">
-    <p class="big">Ask, trust the answer, get on with the decision.</p>
-    <ul><li>Starter questions for your role on the home screen</li><li>Type-ahead that uses your own business terms</li><li>One-click follow-ups: “break down by region”, “compare to last year”</li><li>Thumbs up or down on every answer</li></ul>
+    <p class="big">Ask the number. Get the answer. Decide.</p>
+    <ul><li>Starter questions for your role on the home screen</li><li>One-click follow-ups: “break down by region”, “compare to last year”</li><li>Dashboards, scheduled reports and alerts for your department</li><li>Share an answer by link, or export it to Excel</li></ul>
   </div>
   <div class="tabpanel" role="tabpanel" id="r1" aria-labelledby="t1" hidden>
-    <p class="big">Everything a business user has, plus the SQL.</p>
-    <ul><li>See and edit the SQL behind any answer</li><li>Run your own SQL through the governed query tool</li><li>Drill-down, statistics and forecasts</li><li>Save queries and views</li></ul>
+    <p class="big">See the SQL. Own the business model.</p>
+    <ul><li>Open and edit the SQL behind any answer</li><li>Run your own SQL through the governed query tool</li><li>Drill-down, statistics and forecasts</li><li>Teach terms and metrics once, save queries and views</li></ul>
   </div>
   <div class="tabpanel" role="tabpanel" id="r2" aria-labelledby="t2" hidden>
-    <p class="big">Run GBI for the whole organization, without writing code.</p>
-    <ul><li>Manage data sources, the business model and rules in one console</li><li>Set access by role and attribute</li><li>Add and switch models</li><li>Watch answer quality over time</li></ul>
+    <p class="big">Run it your way, inside your rules.</p>
+    <ul><li>Row and column access by role and attribute</li><li>Local model or hosted model, your choice, switchable</li><li>One admin console for sources, rules and models</li><li>Answer quality tracked against golden questions</li></ul>
   </div>
 </section>
 
@@ -198,31 +221,47 @@
   <div class="trust-in">
     <h2 data-split>Built so the answer can be trusted.</h2>
     <ul class="rows">
-      <li><b>Row limits and timeouts</b><span>on every query, set in the connector or the database user.</span></li>
+      <li><b>Your data stays yours</b><span>run it on your own machines. With a local model, questions and data stay inside your network.</span></li>
       <li><b>Identity from the session</b><span>never from the question. People cannot ask their way past their access.</span></li>
+      <li><b>Row limits and timeouts</b><span>on every query, set in the connector or the database user.</span></li>
       <li><b>Any dialect, any domain</b><span>GBI learns your schema and terms. Nothing is tuned to one industry or one database.</span></li>
       <li><b>Measured before release</b><span>a quality lab scores GBI against golden questions before each release.</span></li>
-      <li><b>Your infrastructure</b><span>run it on your own machines, with a local model if the data must not leave.</span></li>
     </ul>
   </div>
 </section>
 
 <!-- FAQ -->
 <section class="paper faq" id="faq">
-  <h2>Questions people ask first</h2>
+  <h2>Questions executives ask first</h2>
   <div class="qa">
-    <details><summary>Do I need to know SQL?</summary><p>No. You write a question. Analysts and admins can open the SQL if they want to check or change it.</p></details>
+    <details><summary>Does my data go to an AI provider?</summary><p>Only if the admin chooses a hosted model. With a local model, questions, schema and results stay inside your network. With a hosted model, that provider receives what the model needs to answer, under your own API key.</p></details>
+    <details><summary>Which models can GBI use?</summary><p>Any the admin adds: open models run locally through Ollama, or hosted ones such as Anthropic, OpenAI and Gemini. You can switch later without rebuilding anything.</p></details>
     <details><summary>Which databases does it connect to?</summary><p>Oracle, SQL Server, MySQL, Databricks Unity Catalog, Snowflake and others. GBI takes the SQL dialect from the data source.</p></details>
-    <details><summary>Does my data go to an AI provider?</summary><p>That is the admin’s choice. With a local model, questions and data stay inside your network. If the admin adds a hosted model, that provider receives what the model needs to answer.</p></details>
-    <details><summary>Can two people see different answers to the same question?</summary><p>Yes, when their access differs. Row and column rules apply to each person, so a regional manager and a finance lead see what each is allowed to see.</p></details>
-    <details><summary>Is GBI available today?</summary><p>GBI is in early access. Request access and we will reach out about a first set-up on your own data.</p></details>
+    <details><summary>Can two people see different answers to the same question?</summary><p>Yes, when their access differs. Row and column rules apply to each person, so a regional head and a finance lead see what each is allowed to see.</p></details>
+    <details><summary>Do my people need to know SQL?</summary><p>No. They write a question. Analysts and admins can open the SQL to check or change it.</p></details>
+    <details><summary>Is GBI available today?</summary><p>GBI is in early access. Request access and we will arrange a first session on your own data.</p></details>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="final">
-  <h2 data-split>Bring a question your team is still waiting on.</h2>
-  <a class="btn btn-lg magnetic" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request early access</a>
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-in">
+    <div class="contact-copy">
+      <h2 data-split>Bring a question your team is still waiting on.</h2>
+      <p>Tell us which database and which question. We will arrange a first session on your own data.</p>
+      <a class="btn btn-lg magnetic" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request early access</a>
+      <div class="offices" role="tablist" aria-label="Offices">
+        <button role="tab" aria-selected="true" id="o0" aria-controls="mapbox" data-lat="1.3329" data-lon="103.7427"><span>Singapore</span><em>International Business Park (IBP)</em></button>
+        <button role="tab" aria-selected="false" id="o1" aria-controls="mapbox" tabindex="-1" data-lat="2.9213" data-lon="101.6559"><span>Malaysia</span><em>Cyberjaya</em></button>
+        <button role="tab" aria-selected="false" id="o2" aria-controls="mapbox" tabindex="-1" data-lat="34.2011" data-lon="-118.5361"><span>USA</span><em>Reseda, California</em></button>
+      </div>
+    </div>
+    <div class="mapbox" id="mapbox" role="tabpanel" aria-labelledby="o0">
+      <iframe id="map" title="Map of the selected office area" loading="lazy" referrerpolicy="no-referrer"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=103.7127%2C1.3029%2C103.7727%2C1.3629&amp;layer=mapnik&amp;marker=1.3329%2C103.7427"></iframe>
+      <a id="maplink" class="maplink" href="https://www.openstreetmap.org/?mlat=1.3329&amp;mlon=103.7427#map=14/1.3329/103.7427" target="_blank" rel="noopener">Open larger map</a>
+    </div>
+  </div>
 </section>
 </main>
 
