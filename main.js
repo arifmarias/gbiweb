@@ -296,7 +296,7 @@ const set = n => {
 steps.forEach((s, i) => s.addEventListener('click', () => set(i)));
 ScrollTrigger.matchMedia({
   '(min-width:1001px)': () => ScrollTrigger.create({
-    trigger: '.how-pin', start: 'top top', end: '+=1500', pin: true, refreshPriority: 1,
+    trigger: '.how-pin', start: 'top top', end: '+=1500', pin: true, refreshPriority: 1, anticipatePin: 1, invalidateOnRefresh: true,
     onUpdate: s => set(Math.min(2, Math.floor(s.progress * 3)))
   }),
   '(max-width:1000px)': () => {
@@ -304,6 +304,19 @@ ScrollTrigger.matchMedia({
     return ScrollTrigger.create({ trigger: '.how-sec', start: 'top 70%', end: 'bottom top', onToggle: s => { t && t.kill(); if (s.isActive) { cur = -1; set(0); t = gsap.delayedCall(4, tick); } } });
   }
 });
+
+/* anchor links scroll smoothly from JS: CSS smooth scrolling fights the pinned section */
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a || a.getAttribute('href') === '#') return;
+  const t = document.querySelector(a.getAttribute('href')); if (!t) return;
+  e.preventDefault(); history.pushState(null, '', a.getAttribute('href'));
+  scrollTo({ top: t.id === 'top' ? 0 : t.getBoundingClientRect().top + scrollY, behavior: 'smooth' });
+});
+/* late layout changes (fonts, images) move things: measure the scroll triggers again */
+const remeasure = () => ScrollTrigger.refresh();
+if (document.fonts) document.fonts.ready.then(remeasure);
+addEventListener('load', () => { remeasure(); const h = location.hash && document.querySelector(location.hash); if (h) h.scrollIntoView(); });
+$$('details').forEach(d => d.addEventListener('toggle', remeasure)); // opening an answer changes the height
 
 /* magnetic buttons */
 if (fine) $$('.magnetic').forEach(b => {
