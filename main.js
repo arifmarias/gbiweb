@@ -53,45 +53,122 @@ $$('.spot').forEach(c => c.addEventListener('pointermove', e => {
   c.style.setProperty('--mx', e.clientX - r.left + 'px'); c.style.setProperty('--my', e.clientY - r.top + 'px');
 }));
 
-/* demo */
-const demos = [
-  { q: 'Which divisions are furthest ahead of plan this quarter?',
-    bold: 'Retail leads at 14.2% above plan,', rest: 'ahead of Wholesale at 9.8%. Online is on plan.',
-    unit: '%', rows: [['Retail', 14.2], ['Wholesale', 9.8], ['Corporate', 5.1], ['Partners', 3.4], ['Online', 0.2]],
-    how: ['How I got this', 'tables: sales_orders, plan_targets', 'filter: this quarter, vs plan'] },
-  { q: 'Where are claims taking longest to settle?',
-    bold: 'Property claims take longest: 31 days on average,', rest: '9 more than motor. Liability is closing fastest.',
-    unit: 'd', rows: [['Property', 31], ['Marine', 27], ['Health', 24], ['Motor', 22], ['Liability', 18]],
-    how: ['How I got this', 'tables: claims, claim_types', 'filter: settled, last 90 days'] }
+/* hero app mockup: pick a question, see the answer view */
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const monthsFrom = (m0, y0, n) => Array.from({ length: n }, (_, i) => `${MON[(m0 + i) % 12]} ${y0 + Math.floor((m0 + i) / 12)}`);
+const fmt = n => Math.round(n).toLocaleString('en-US');
+const orders = [1, 3, 6, 7, 8, 15, 16, 16, 24, 28, 23, 28, 32, 36, 42, 46, 44, 49, 40, 27, 38, 41, 48, 44, 33, 48, 43, 42, 41, 55, 45, 52, 39, 56, 104];
+const oLab = monthsFrom(1, 2023, orders.length);
+const oTotal = orders.reduce((a, b) => a + b, 0);
+const active = [6900, 7050, 7120, 7300, 7410, 7500, 7620, 7800, 7890, 8010, 8170, 8420];
+const aLab = monthsFrom(0, 2025, active.length);
+const div = [['Retail', 14.2], ['Wholesale', 9.8], ['Corporate', 5.1], ['Partners', 3.4], ['Online', 0.2]];
+const clm = [['Property', 48.2], ['Health', 31.6], ['Motor', 27.9], ['Marine', 19.4], ['Liability', 12.3]];
+const cTotal = clm.reduce((a, r) => a + r[1], 0);
+const QS = [
+  { q: 'How did monthly orders change over time?', type: 'line', title: 'Orders per month', vals: orders, labs: oLab, unit: '',
+    ans: [`Monthly orders grew from ${orders[0]} in ${oLab[0]} to`, `${orders.at(-1)} in ${oLab.at(-1)},`, 'the highest month so far. Growth was steady, with one dip in mid-2024.'],
+    kpis: [['Latest month', orders.at(-1), fmt, `▲ ${Math.round((orders.at(-1) / orders.at(-2) - 1) * 100)}% vs ${oLab.at(-2)}`], ['Total orders', oTotal, fmt, `${oLab[0]} to ${oLab.at(-1)}`, 1], ['Average per month', oTotal / orders.length, fmt, `${orders.length} months`, 1]],
+    used: 'orders', how: ['tables: orders', 'filter: all time', `rows: ${orders.length}`], fu: ['Break down by region', 'Compare with the year before'] },
+  { q: 'Which divisions are furthest ahead of plan?', type: 'bars', title: 'Against plan, this quarter', rows: div, unit: '%',
+    ans: ['Retail leads at 14.2% above plan,', '', 'ahead of Wholesale at 9.8%. Online is on plan.'],
+    kpis: [['Top division', 14.2, v => '+' + v.toFixed(1) + '%', 'Retail'], ['Average', div.reduce((a, r) => a + r[1], 0) / div.length, v => '+' + v.toFixed(1) + '%', '5 divisions', 1], ['Spread', 14.2 - 0.2, v => v.toFixed(1) + ' pts', 'top to bottom', 1]],
+    used: 'sales_orders, plan_targets', how: ['tables: sales_orders, plan_targets', 'filter: this quarter, vs plan', 'rows: 5'], fu: ['Compare with last quarter', 'Show by month'] },
+  { q: 'What is the total amount of all claim payments?', type: 'bars', title: 'Claim payments by type (m)', rows: clm, unit: 'm',
+    ans: [`Claim payments total ${cTotal.toFixed(1)}m.`, '', `Property is the largest share at ${Math.round(clm[0][1] / cTotal * 100)}%, followed by Health at ${Math.round(clm[1][1] / cTotal * 100)}%.`],
+    kpis: [['Total paid', cTotal, v => v.toFixed(1) + 'm', 'all settled claims'], ['Largest type', clm[0][1] / cTotal * 100, v => Math.round(v) + '%', 'Property', 1], ['Claim types', clm.length, fmt, 'in the data', 1]],
+    used: 'claim_payments, claim_types', how: ['tables: claim_payments, claim_types', 'filter: settled claims', 'rows: 5'], fu: ['Compare with last year', 'Show by month'] },
+  { q: 'How many customers were active this month?', type: 'line', title: 'Active customers per month', vals: active, labs: aLab, unit: '', min: 6000, max: 9000,
+    ans: ['', `${fmt(active.at(-1))} customers were active in ${aLab.at(-1)},`, `up ${((active.at(-1) / active.at(-2) - 1) * 100).toFixed(1)}% on ${aLab.at(-2)}. Growth has held for twelve months.`],
+    kpis: [['Active this month', active.at(-1), fmt, `▲ ${((active.at(-1) / active.at(-2) - 1) * 100).toFixed(1)}% vs ${aLab.at(-2)}`], ['New this month', 612, fmt, 'first purchase', 1], ['Returning', active.at(-1) - 612, fmt, 'bought before', 1]],
+    used: 'customers, orders', how: ['tables: customers, orders', 'filter: active = bought in month', `rows: ${active.length}`], fu: ['Break down by region', 'Compare with the year before'] }
 ];
-const dqt = $('#dqt'), dthink = $('#dthink'), dans = $('#dans'), dchart = $('#dchart'), dhow = $('#dhow');
-function build(d) {
+const el = { start: $('#vstart'), ans: $('#vans'), bub: $('#abub'), text: $('#atext'), kpis: $('#akpis'), title: $('#atitle'), body: $('#abody'), used: $('#aused'), how: $('#ahow'), howrow: $('#ahowrow'), fups: $('#afups') };
+let qc = null, view = 'chart', run = null, touched = false, lastPick = null;
+
+function lineChart(d) {
+  const W = 560, H = 132, n = d.vals.length, min = d.min ?? 0, max = d.max ?? Math.ceil(Math.max(...d.vals) / 20) * 20;
+  const pts = d.vals.map((v, i) => [i / (n - 1) * W, H - (v - min) / (max - min) * H]);
+  const path = 'M' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L');
+  const last = pts.at(-1), pct = v => (v * 100).toFixed(2) + '%';
+  return `<div class="lc"><div class="ya"><span>${fmt(max)}</span><span>${fmt((max + min) / 2)}</span><span>${fmt(min)}</span></div>
+    <div class="plot"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#46c48f" stop-opacity=".28"/><stop offset="1" stop-color="#46c48f" stop-opacity="0"/></linearGradient></defs>
+    <line class="gl" x1="0" x2="${W}" y1="0" y2="0"/><line class="gl" x1="0" x2="${W}" y1="${H / 2}" y2="${H / 2}"/><line class="gl" x1="0" x2="${W}" y1="${H}" y2="${H}"/>
+    <path class="ar" d="${path} L${W} ${H} L0 ${H} Z"/><path class="ln" d="${path}"/></svg>
+    <span class="pt" style="left:${pct(last[0] / W)};top:${pct(last[1] / H)}"></span><span class="ptv" style="left:${pct(last[0] / W)};top:${pct(last[1] / H)}">${fmt(d.vals.at(-1))}</span></div>
+    <div class="xa"><span>${d.labs[0]}</span><span>${d.labs[Math.floor(n / 2)]}</span><span>${d.labs.at(-1)}</span></div></div>`;
+}
+function barChart(d) {
   const max = Math.max(...d.rows.map(r => r[1]));
-  dchart.innerHTML = d.rows.map((r, i) =>
-    `<div class="bar${i ? '' : ' top'}"><span>${r[0]}</span><div class="t"><i style="--v:${(r[1] / max * 100).toFixed(1)}%"></i></div><em>${r[1]}${d.unit}</em></div>`).join('');
-  dhow.innerHTML = d.how.map(h => `<span>${h}</span>`).join('');
+  return `<div class="bars">${d.rows.map((r, i) => `<div class="bar${i ? '' : ' top'}"><span>${r[0]}</span><div class="t"><i style="--v:${(r[1] / max * 100).toFixed(1)}%"></i></div><em>${r[1]}${d.unit}</em></div>`).join('')}</div>`;
 }
-const words = d => (d.bold + ' ' + d.rest).split(' ');
-function render(d, k) {
-  const w = words(d), nb = d.bold.split(' ').length;
-  dans.innerHTML = k <= nb ? `<b>${w.slice(0, k).join(' ')}</b>` : `<b>${w.slice(0, nb).join(' ')}</b> ${w.slice(nb, k).join(' ')}`;
+function table(d) {
+  const rows = d.type === 'line' ? d.vals.map((v, i) => [d.labs[i], fmt(v)]).slice(-6).reverse() : d.rows.map(r => [r[0], r[1] + d.unit]);
+  return `<table class="tb"><thead><tr><th>${d.type === 'line' ? 'Month' : 'Name'}</th><th>Value</th></tr></thead><tbody>${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</tbody></table>${d.type === 'line' ? '<p class="tbn">Latest 6 months shown</p>' : ''}`;
 }
-function still(d) { dqt.textContent = d.q; build(d); render(d, words(d).length); }
-function play(i) {
-  const d = demos[i % demos.length], o = { n: 0 }, m = { n: 0 }, w = words(d);
-  dqt.textContent = ''; dans.innerHTML = ''; build(d);
-  gsap.set(['#dchart .t i'], { scaleX: 0 }); gsap.set('#dchart .bar em', { opacity: 0 }); gsap.set('#dhow span', { opacity: 0, y: 6 }); gsap.set(dthink, { opacity: 0 });
-  gsap.timeline({ onComplete: () => play(i + 1) })
-    .to(o, { n: d.q.length, duration: d.q.length * .03, ease: 'none', onUpdate: () => dqt.textContent = d.q.slice(0, Math.round(o.n)) }, .5)
-    .to(dthink, { opacity: 1, duration: .25 }, '+=.2')
-    .to(m, { n: w.length, duration: w.length * .06, ease: 'none', onUpdate: () => render(d, Math.round(m.n)) }, '+=1.1')
-    .to(dthink, { opacity: 0, duration: .2 }, '<')
-    .to('#dchart .t i', { scaleX: 1, duration: .9, stagger: .09, ease: 'power3.out' }, '-=.4')
-    .to('#dchart .bar em', { opacity: 1, duration: .4, stagger: .09 }, '<.3')
-    .to('#dhow span', { opacity: 1, y: 0, duration: .4, stagger: .1, ease: 'power2.out' }, '-=.3')
-    .to({}, { duration: 4 });
+const words2 = d => d.ans.join(' ').trim().split(/\s+/);
+function renderText(d, k) {
+  const w = words2(d);
+  const wc = s => s.trim() ? s.trim().split(/\s+/).length : 0;
+  const start = d.ans[1] ? wc(d.ans[0]) : 0, end = start + (d.ans[1] ? wc(d.ans[1]) : wc(d.ans[0]));
+  el.text.innerHTML = w.slice(0, k).map((t, i) => i >= start && i < end ? `<b>${t}</b>` : t).join(' ');
 }
-if (calm) still(demos[0]); else play(0);
+function fill(d) {
+  el.bub.textContent = d.q;
+  el.kpis.innerHTML = d.kpis.map(k => `<div class="kpi"><small>${k[0]}</small><b>${k[2](k[1])}</b><em${k[4] ? ' class="n"' : ''}>${k[3]}</em></div>`).join('');
+  el.title.textContent = d.title;
+  el.used.innerHTML = `Used <b>${d.used}</b>`;
+  el.howrow.innerHTML = d.how.map(h => `<span>${h}</span>`).join('');
+  el.fups.innerHTML = d.fu.map(f => `<span>${f}</span>`).join('');
+  setView('chart', d, false);
+}
+function setView(v, d, animate) {
+  view = v;
+  $$('.tg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v));
+  el.body.innerHTML = v === 'table' ? table(d) : d.type === 'line' ? lineChart(d) : barChart(d);
+  if (animate && !calm) gsap.from(el.body.children, { opacity: 0, y: 8, duration: .35, ease: 'power2.out' });
+}
+function show(i, auto, kb) {
+  if (!auto) touched = true;
+  run && run.kill(); qc = QS[i]; lastPick = i;
+  el.start.hidden = true; el.ans.hidden = false;
+  el.howrow.hidden = true; el.how.setAttribute('aria-expanded', false);
+  fill(qc);
+  if (calm) { renderText(qc, words2(qc).length); kb && $('#vback').focus({ preventScroll: true }); return; }
+  const w = words2(qc), o = { n: 0 }, kp = $$('.kpi', el.kpis);
+  renderText(qc, 0);
+  const line = $('.ln', el.body), bars = $$('.bar', el.body);
+  gsap.set([el.bub, ...kp, '.acard', '.ameta', el.fups], { opacity: 0, y: 12 });
+  run = gsap.timeline()
+    .to(el.bub, { opacity: 1, y: 0, duration: .4, ease: 'power3.out' })
+    .to(o, { n: w.length, duration: w.length * .045, ease: 'none', onUpdate: () => renderText(qc, Math.round(o.n)) }, '>-.05')
+    .to(kp, { opacity: 1, y: 0, duration: .45, stagger: .08, ease: 'power3.out' }, '-=.9')
+    .to('.acard', { opacity: 1, y: 0, duration: .45, ease: 'power3.out' }, '-=.5');
+  if (line) {
+    const len = line.getTotalLength(), extras = $$('.ar, .pt, .ptv', el.body);
+    gsap.set(line, { strokeDasharray: len, strokeDashoffset: len }); gsap.set(extras, { opacity: 0 });
+    run.to(line, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' }, '<.1').to(extras, { opacity: 1, duration: .5 }, '-=.3');
+  } else {
+    const fills = bars.map(b => $('.t i', b)), vals = bars.map(b => $('em', b));
+    gsap.set(fills, { scaleX: 0 }); gsap.set(vals, { opacity: 0 });
+    run.to(fills, { scaleX: 1, duration: .8, stagger: .08, ease: 'power3.out' }, '<.1').to(vals, { opacity: 1, duration: .3, stagger: .08 }, '<.2');
+  }
+  run.to(['.ameta', el.fups], { opacity: 1, y: 0, duration: .4, stagger: .1, ease: 'power2.out' }, '-=.4');
+  kb && $('#vback').focus({ preventScroll: true });
+}
+function back(kb) {
+  run && run.kill(); el.ans.hidden = true; el.start.hidden = false;
+  if (!calm) gsap.from('#vstart > *', { opacity: 0, y: 10, duration: .4, stagger: .05, ease: 'power3.out' });
+  const p = $(`.pick[data-i="${lastPick}"]`); kb && p && p.focus({ preventScroll: true });
+}
+// keyboard "clicks" have detail 0: only then move focus (a mouse click must not show a focus ring)
+$$('.pick').forEach(b => b.addEventListener('click', e => show(+b.dataset.i, false, e.detail === 0)));
+$('#vback').addEventListener('click', e => back(e.detail === 0));
+$$('.tg button').forEach(b => b.addEventListener('click', () => qc && setView(b.dataset.v, qc, true)));
+el.how.addEventListener('click', () => { const o = el.howrow.hidden; el.howrow.hidden = !o; el.how.setAttribute('aria-expanded', o); });
+$('#app').addEventListener('pointerdown', () => { touched = true; });
+// first visit: show the answer view once if the visitor has not touched it
+if (!calm) setTimeout(() => { if (!touched) show(0, true); }, 2800);
 
 /* the race: each lane takes progress p (0..1) */
 function lane(el, p) {

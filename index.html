@@ -51,14 +51,40 @@
     </div>
   </div>
 
-  <figure class="demo" aria-label="Example of GBI answering a question">
+  <figure class="demo" id="app" aria-label="Interactive example of GBI. Pick a question to see an answer.">
     <div class="demo-bar"><i></i><i></i><i></i><span>GBI · Ask</span><em>Illustrative data</em></div>
-    <div class="demo-body">
-      <div class="q" id="dq"><span id="dqt"></span></div>
-      <div class="think" id="dthink"><span>Reading the business model…</span></div>
-      <p class="ans" id="dans"></p>
-      <div class="chart" id="dchart" role="img" aria-label="Bar chart of the answer"></div>
-      <div class="how" id="dhow"></div>
+    <div class="app-body">
+      <div class="view start" id="vstart">
+        <img class="gmark" src="assets/mark-512.png" width="44" height="44" alt="">
+        <h3>Ask GBI</h3>
+        <p class="sub">Ask a question about your data in plain words. GBI answers first, then shows the table and a chart.</p>
+        <div class="finput" aria-hidden="true"><span>Ask a question about your data</span><i></i></div>
+        <p class="try">Try asking. Pick one:</p>
+        <div class="picks">
+          <button class="pick" type="button" data-i="0"><small>Trend</small><span>How did monthly orders change over time?</span></button>
+          <button class="pick" type="button" data-i="1"><small>Ranking</small><span>Which divisions are furthest ahead of plan?</span></button>
+          <button class="pick" type="button" data-i="2"><small>Total</small><span>What is the total amount of all claim payments?</span></button>
+          <button class="pick" type="button" data-i="3"><small>Count</small><span>How many customers were active this month?</span></button>
+        </div>
+      </div>
+      <div class="view answer" id="vans" hidden aria-live="polite">
+        <button class="back" id="vback" type="button">← New question</button>
+        <div class="bubble" id="abub"></div>
+        <p class="atext" id="atext"></p>
+        <div class="kpis" id="akpis"></div>
+        <div class="acard">
+          <div class="ahead"><b id="atitle"></b>
+            <div class="tg" role="group" aria-label="View"><button type="button" aria-pressed="true" data-v="chart">Chart</button><button type="button" aria-pressed="false" data-v="table">Table</button></div>
+          </div>
+          <div class="abody" id="abody"></div>
+        </div>
+        <div class="ameta">
+          <span class="pill ok">High confidence</span><span class="pill">AI answer · not reviewed</span><span class="used" id="aused"></span>
+          <button class="howbtn" id="ahow" type="button" aria-expanded="false">How I got this</button>
+        </div>
+        <div class="howrow" id="ahowrow" hidden></div>
+        <div class="fups" id="afups"></div>
+      </div>
     </div>
   </figure>
 </section>
