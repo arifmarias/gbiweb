@@ -61,11 +61,21 @@ $$('.fig').forEach((b, i) => b.addEventListener('click', () => {
   if (!calm) gsap.fromTo('.receipt > *:not(.rl)', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .35, stagger: .05, ease: 'power2.out', overwrite: true });
 }));
 
-/* spotlight cards */
-$$('.spot').forEach(c => c.addEventListener('pointermove', e => {
-  const r = c.getBoundingClientRect();
-  c.style.setProperty('--mx', e.clientX - r.left + 'px'); c.style.setProperty('--my', e.clientY - r.top + 'px');
-}));
+/* feature visual 3: the same question, two roles. Rendered first so it works without motion */
+const FXR = [['North', 41], ['South', 32], ['East', 27], ['West', 18]];
+let fxRole = 'exec', fxUser = false;
+function fx3(role, animate) {
+  fxRole = role;
+  $$('#fx3 .fx-seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.u === role));
+  $('#fx3bars').innerHTML = FXR.map(([n, v]) => {
+    const lock = role === 'reg' && n !== 'East', mine = role === 'reg' && n === 'East';
+    return `<div class="fx-row${lock ? ' lock' : ''}${mine ? ' mine' : ''}"><span>${n}</span><div class="t"><i style="--v:${v / 41 * 100}%"></i></div><em>${lock ? '—' : v}</em></div>`;
+  }).join('');
+  $('#fx3note').textContent = role === 'exec' ? 'Rules applied: all regions' : 'Rules applied: region = East. Other rows hidden.';
+  if (animate && !calm) gsap.from('#fx3bars .t i', { scaleX: 0, duration: .6, stagger: .06, ease: 'power3.out' });
+}
+fx3('exec');
+$$('#fx3 .fx-seg button').forEach(b => b.addEventListener('click', () => { fxUser = true; fx3(b.dataset.u, true); }));
 
 /* hero app mockup: pick a question, see the answer view */
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -212,7 +222,60 @@ $$('[data-split]').slice(1).forEach(h => gsap.from(wordsOf(h), {
 
 const reveal = (sel, vars = {}) => $$(sel).forEach(el => gsap.from(el, { y: 36, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, ...vars }));
 reveal('.sources');reveal('.tabs, .tabpanel'); reveal('.qa details', { y: 20 }); reveal('.flow'); reveal('.office', { y: 20 });
-gsap.from('.bento .card', { y: 40, opacity: 0, duration: .8, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%', once: true } });
+/* feature chapters: text rises in, the visual slides in from its side */
+$$('.chap').forEach(c => {
+  const flip = c.classList.contains('flip');
+  gsap.timeline({ scrollTrigger: { trigger: c, start: 'top 78%', once: true } })
+    .from($$('.chap-text > *', c), { y: 26, opacity: 0, duration: .7, stagger: .09, ease: 'power3.out' })
+    .from($('.chap-vis', c), { x: flip ? -50 : 50, opacity: 0, duration: .9, ease: 'power3.out' }, .1);
+});
+const fxLoop = (id, tl) => ScrollTrigger.create({ trigger: id, start: 'top 80%', end: 'bottom 10%', onToggle: s => s.isActive ? tl.play() : tl.pause() });
+// 1: one question in four languages, then a clarifying question in the same language
+const LANGS = [
+  ['English', 'How are sales this quarter?', 'Which period do you mean?', ['This quarter', 'Last quarter']],
+  ['বাংলা', 'এই প্রান্তিকে বিক্রি কেমন?', 'কোন সময়ের কথা বলছেন?', ['এই প্রান্তিক', 'গত প্রান্তিক']],
+  ['Bahasa Melayu', 'Bagaimana jualan suku ini?', 'Tempoh yang mana?', ['Suku ini', 'Suku lepas']],
+  ['中文', '本季度销售情况如何？', '您指的是哪个时间段？', ['本季度', '上季度']]
+];
+const fx1 = gsap.timeline({ repeat: -1, paused: true });
+LANGS.forEach(([lang, q, ask, chips]) => {
+  const o = { n: 0 }, ch = [...q];
+  fx1.call(() => {
+    $('#fx1lang').textContent = lang; $('#fx1q').textContent = '';
+    $('#fx1a').innerHTML = `<b>${ask}</b><span class="fx-chips">${chips.map(c => `<i>${c}</i>`).join('')}</span>`;
+  })
+    .set('#fx1q', { opacity: 1 }).set('#fx1a', { opacity: 0, y: 10 })
+    .to(o, { n: ch.length, duration: Math.max(.9, ch.length * .045), ease: 'none', onUpdate: () => { $('#fx1q').textContent = ch.slice(0, Math.round(o.n)).join(''); } })
+    .to('#fx1a', { opacity: 1, y: 0, duration: .4, ease: 'power3.out' }, '+=.3')
+    .to({}, { duration: 2 })
+    .to(['#fx1q', '#fx1a'], { opacity: 0, duration: .3 });
+});
+fxLoop('#fx1', fx1);
+// 2: a rule is typed, saved, then used by the next answer
+const fx2 = gsap.timeline({ repeat: -1, paused: true }), t2 = { n: 0 }, m2 = 'bought in the last 30 days';
+fx2.call(() => { $('#fx2m').textContent = ''; })
+  .set('#fx2ans', { opacity: 0, y: 12 }).set('#fx2v', { opacity: 0 })
+  .to(t2, { n: m2.length, duration: 1.6, ease: 'none', onUpdate: () => { $('#fx2m').textContent = m2.slice(0, Math.round(t2.n)); } })
+  .to('#fx2b', { scale: .93, duration: .12, yoyo: true, repeat: 1 }, '+=.3')
+  .to('#fx2ans', { opacity: 1, y: 0, duration: .5, ease: 'power3.out' }, '+=.15')
+  .to('#fx2v', { opacity: 1, duration: .4 }, '+=.7')
+  .to({}, { duration: 2.4 })
+  .to('#fx2ans', { opacity: 0, duration: .3 });
+fxLoop('#fx2', fx2);
+// 3: flips between the two roles until the visitor takes over
+let fxTimer;
+ScrollTrigger.create({ trigger: '#fx3', start: 'top 80%', end: 'bottom 10%', onToggle: s => {
+  clearInterval(fxTimer);
+  if (s.isActive && !fxUser) fxTimer = setInterval(() => { if (fxUser) clearInterval(fxTimer); else fx3(fxRole === 'exec' ? 'reg' : 'exec', true); }, 3800);
+} });
+// 4: dashboard tiles and a schedule, then an alert arrives
+const fx4 = gsap.timeline({ repeat: -1, paused: true });
+fx4.set('#fx4t', { opacity: 0, y: 14 })
+  .from('#fx4 .fx-tiles div, #fx4 .fx-list li', { opacity: 0, y: 12, duration: .45, stagger: .1, ease: 'power3.out' })
+  .to('#fx4t', { opacity: 1, y: 0, duration: .5, ease: 'back.out(1.6)' }, '+=.4')
+  .to({}, { duration: 2.6 })
+  .to('#fx4t', { opacity: 0, y: 14, duration: .3 });
+fxLoop('#fx4', fx4);
 gsap.from('.rows li', { y: 24, opacity: 0, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.rows', start: 'top 85%', once: true } });
 // the race: scroll scrubs the slow route, the direct route finishes as it enters
 const [A, B] = $$('.lane');

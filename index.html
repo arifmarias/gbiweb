@@ -161,41 +161,114 @@
 <!-- FEATURES -->
 <section class="paper feats" id="features">
   <h2 data-split>Built for the executive who reads the answer, and the team who has to defend it.</h2>
-  <div class="bento">
-    <article class="card c-wide spot">
-      <h3>Answers you can check</h3>
-      <p>Every answer carries “How I got this”: the tables used and the filters applied. Analysts and admins can open and edit the SQL.</p>
-      <div class="chips"><span>tables: orders, regions</span><span>filter: last quarter</span><span>rows: 12</span></div>
-    </article>
-    <article class="card spot">
-      <h3>Asks before it guesses</h3>
-      <p>A vague question gets a short clarifying question, such as which period you mean.</p>
-    </article>
-    <article class="card spot">
+  <p class="gap-sub">Four things make an answer easy to ask for and safe to act on.</p>
+
+  <article class="chap">
+    <div class="chap-text">
+      <span class="chap-n">01</span>
+      <h3>Ask in your own words</h3>
+      <p class="chap-lead">Nobody has to learn SQL, a dashboard or a new vocabulary. People ask the way they speak.</p>
+      <ul class="ticks">
+        <li>Any major language, Bangla included</li>
+        <li>On WhatsApp too, switched on by the admin</li>
+        <li>Type-ahead that suggests your own business terms</li>
+        <li>A clarifying question before any guess</li>
+      </ul>
+      <p class="why"><b>Why it matters</b> Questions stop waiting for the one person who knows SQL.</p>
+    </div>
+    <div class="chap-vis">
+      <div class="fx" id="fx1" aria-hidden="true">
+        <div class="fx-bar"><span>Ask GBI</span><em id="fx1lang">English</em></div>
+        <div class="fx-body">
+          <div class="fx-bub me" id="fx1q">How are sales this quarter?</div>
+          <div class="fx-bub gbi" id="fx1a"><b>Which period do you mean?</b><span class="fx-chips"><i>This quarter</i><i>Last quarter</i></span></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="chap flip">
+    <div class="chap-text">
+      <span class="chap-n">02</span>
+      <h3>Teach it your business once</h3>
+      <p class="chap-lead">Tell GBI what “active customer” or “net revenue” means in your company. It remembers, and applies it everywhere.</p>
+      <ul class="ticks">
+        <li>Define a term, metric or rule once</li>
+        <li>It applies to every question after</li>
+        <li>Answers people mark as good become verified examples</li>
+        <li>The business model stays current, not built once</li>
+      </ul>
+      <p class="why"><b>Why it matters</b> Nobody has to re-explain the business each time they ask.</p>
+    </div>
+    <div class="chap-vis">
+      <div class="fx" id="fx2" aria-hidden="true">
+        <div class="fx-bar"><span>Admin · Business rules</span><em>New rule</em></div>
+        <div class="fx-body">
+          <div class="fx-field"><small>Term</small><span id="fx2t">Active customer</span></div>
+          <div class="fx-field"><small>Means</small><span id="fx2m">bought in the last 30 days</span></div>
+          <div class="fx-btn" id="fx2b">Save rule</div>
+          <div class="fx-ans" id="fx2ans"><small>The next question uses it</small><p><b>8,420</b> customers were active this month.</p><span class="fx-tags"><i>uses rule: Active customer</i><i class="brass" id="fx2v">✓ Verified example</i></span></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="chap">
+    <div class="chap-text">
+      <span class="chap-n">03</span>
       <h3>Access follows the person</h3>
-      <p>Row and column rules by role and attribute. A regional head sees their region. Identity comes from the session only.</p>
-    </article>
-    <article class="card c-wide spot">
-      <h3>A model that keeps learning</h3>
-      <p>Teach GBI a business term, metric or rule once and it applies to every question after. Answers people mark as good become verified examples.</p>
-    </article>
-    <article class="card spot">
-      <h3>Reports and alerts</h3>
-      <p>Dashboards, scheduled reports and alerts for each department, built from answers people already trust.</p>
-    </article>
-    <article class="card spot">
-      <h3>Your language</h3>
-      <p>Ask in any major language, Bangla included.</p>
-    </article>
-    <article class="card spot">
-      <h3>On WhatsApp too</h3>
-      <p>Admins switch on a WhatsApp channel so people can ask where they already chat.</p>
-    </article>
-    <article class="card spot">
-      <h3>Share what you find</h3>
-      <p>Send an answer as a link, export it to CSV or Excel, or pin it to a shared dashboard.</p>
-    </article>
-  </div>
+      <p class="chap-lead">The same question gives each person the answer they are allowed to see, and only that.</p>
+      <ul class="ticks">
+        <li>Row and column rules by role and attribute</li>
+        <li>Identity comes from the session, never from the question</li>
+        <li>Row limits and timeouts on every query</li>
+        <li>Try it: switch the role on the right</li>
+      </ul>
+      <p class="why"><b>Why it matters</b> You can open GBI to everyone without opening your data to everyone.</p>
+    </div>
+    <div class="chap-vis">
+      <div class="fx" id="fx3">
+        <div class="fx-bar"><span>Revenue by region</span>
+          <div class="fx-seg" role="group" aria-label="Role">
+            <button type="button" aria-pressed="true" data-u="exec">Executive</button>
+            <button type="button" aria-pressed="false" data-u="reg">Regional head</button>
+          </div>
+        </div>
+        <div class="fx-body">
+          <div class="fx-bars" id="fx3bars"></div>
+          <p class="fx-note" id="fx3note" aria-live="polite">Rules applied: all regions</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="chap flip">
+    <div class="chap-text">
+      <span class="chap-n">04</span>
+      <h3>It reaches the people who need it</h3>
+      <p class="chap-lead">An answer is only useful when it gets to the right person, in time to matter.</p>
+      <ul class="ticks">
+        <li>Pin any answer to a personal or shared dashboard</li>
+        <li>Scheduled reports and alerts for each department</li>
+        <li>Share an answer as a link</li>
+        <li>Export to CSV or Excel</li>
+      </ul>
+      <p class="why"><b>Why it matters</b> The right number reaches the right person without anyone having to ask.</p>
+    </div>
+    <div class="chap-vis">
+      <div class="fx" id="fx4" aria-hidden="true">
+        <div class="fx-bar"><span>Regional sales dashboard</span><em>Shared</em></div>
+        <div class="fx-body">
+          <div class="fx-tiles"><div><small>Revenue</small><b>1.2m</b></div><div><small>Orders</small><b>1,220</b></div></div>
+          <ul class="fx-list"><li><span>Weekly returns report</span><em>Every Monday</em></li><li><span>Alert: returns above 8%</span><em>On</em></li></ul>
+          <div class="fx-toast" id="fx4t"><b>Alert</b> Returns passed 8% in Outdoor</div>
+          <div class="fx-tags"><i>Link</i><i>CSV</i><i>Excel</i></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <p class="chap-foot">Every answer also shows how it was made: the tables, the filters and, for analysts, the SQL. <a href="#trust">See a receipt</a></p>
 </section>
 
 <!-- MODELS -->
