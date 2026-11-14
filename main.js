@@ -14,6 +14,16 @@ burger.addEventListener('click', () => {
 });
 menu.addEventListener('click', e => { if (e.target.closest('a')) { burger.setAttribute('aria-expanded', false); menu.classList.remove('open'); } });
 
+/* request form: no server on a static host, so it writes the email for the visitor */
+// ponytail: mailto instead of a form backend; swap for a form endpoint when one exists
+$('#reqform').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(e.target), g = k => (f.get(k) || '').trim();
+  const body = `Name: ${g('name')}\nCompany: ${g('company')}\nRole: ${g('role')}\nMain database: ${g('db')}\n\nThe question we are waiting on:\n${g('q')}\n`;
+  location.href = `mailto:hello@gbi.chat?subject=${encodeURIComponent('GBI early access: ' + g('company'))}&body=${encodeURIComponent(body)}`;
+  $('#formnote').textContent = 'Your email app now has the request. Send it to finish. No email app? Write to hello@gbi.chat or WhatsApp +60 17-263 9699.';
+});
+
 /* tabs: roles, model mode, offices */
 function tabsOf(sel, onPick) {
   const list = $$(sel);
@@ -58,7 +68,7 @@ $$('.fig').forEach((b, i) => b.addEventListener('click', () => {
   $$('.fig').forEach(f => f.setAttribute('aria-pressed', f === b));
   const r = RC[i];
   $('#rv').textContent = r.v; $('#rk').textContent = r.k; $('#rflt').textContent = r.flt; $('#rsql').textContent = r.sql;
-  if (!calm) gsap.fromTo('.receipt > *:not(.rl)', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .35, stagger: .05, ease: 'power2.out', overwrite: true });
+  if (!calm) gsap.fromTo('#receipt', { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 -20% 0)', duration: .9, ease: 'steps(14)', overwrite: true, clearProps: 'clipPath' });
 }));
 
 /* feature visual 3: the same question, two roles. Rendered first so it works without motion */
@@ -107,7 +117,7 @@ const QS = [
     kpis: [['Active this month', active.at(-1), fmt, `▲ ${((active.at(-1) / active.at(-2) - 1) * 100).toFixed(1)}% vs ${aLab.at(-2)}`], ['New this month', 612, fmt, 'first purchase', 1], ['Returning', active.at(-1) - 612, fmt, 'bought before', 1]],
     used: 'customers, orders', how: ['tables: customers, orders', 'filter: active = bought in month', `rows: ${active.length}`], fu: ['Break down by region', 'Compare with the year before'] }
 ];
-const el = { start: $('#vstart'), ans: $('#vans'), bub: $('#abub'), text: $('#atext'), kpis: $('#akpis'), title: $('#atitle'), body: $('#abody'), used: $('#aused'), how: $('#ahow'), howrow: $('#ahowrow'), fups: $('#afups') };
+const el = { start: $('#vstart'), ans: $('#vans'), bub: $('#abub'), text: $('#atext'), kpis: $('#akpis'), title: $('#atitle'), body: $('#abody'), used: $('#aused'), fups: $('#afups'), rc: $('#hrc'), idle: $('#pidle') };
 let qc = null, view = 'chart', run = null, touched = false, lastPick = null;
 
 function lineChart(d) {
@@ -116,7 +126,7 @@ function lineChart(d) {
   const path = 'M' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L');
   const last = pts.at(-1), pct = v => (v * 100).toFixed(2) + '%';
   return `<div class="lc"><div class="ya"><span>${fmt(max)}</span><span>${fmt((max + min) / 2)}</span><span>${fmt(min)}</span></div>
-    <div class="plot"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#46c48f" stop-opacity=".28"/><stop offset="1" stop-color="#46c48f" stop-opacity="0"/></linearGradient></defs>
+    <div class="plot"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c7550" stop-opacity=".28"/><stop offset="1" stop-color="#1c7550" stop-opacity="0"/></linearGradient></defs>
     <line class="gl" x1="0" x2="${W}" y1="0" y2="0"/><line class="gl" x1="0" x2="${W}" y1="${H / 2}" y2="${H / 2}"/><line class="gl" x1="0" x2="${W}" y1="${H}" y2="${H}"/>
     <path class="ar" d="${path} L${W} ${H} L0 ${H} Z"/><path class="ln" d="${path}"/></svg>
     <span class="pt" style="left:${pct(last[0] / W)};top:${pct(last[1] / H)}"></span><span class="ptv" style="left:${pct(last[0] / W)};top:${pct(last[1] / H)}">${fmt(d.vals.at(-1))}</span></div>
@@ -142,7 +152,12 @@ function fill(d) {
   el.kpis.innerHTML = d.kpis.map(k => `<div class="kpi"><small>${k[0]}</small><b>${k[2](k[1])}</b><em${k[4] ? ' class="n"' : ''}>${k[3]}</em></div>`).join('');
   el.title.textContent = d.title;
   el.used.innerHTML = `Used <b>${d.used}</b>`;
-  el.howrow.innerHTML = d.how.map(h => `<span>${h}</span>`).join('');
+  // the receipt for the headline figure of this answer
+  const k = d.kpis[0];
+  $('#hrv').textContent = k[2](k[1]); $('#hrk').textContent = k[0];
+  $('#hrrows').innerHTML = d.how.map(h => { const [a, b] = h.split(': '); return `<div><dt>${a}</dt><dd>${b}</dd></div>`; }).join('') + '<div><dt>access</dt><dd>Executive role</dd></div>';
+  $('#hrtime').textContent = new Date().toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+  el.idle.hidden = true; el.rc.hidden = false;
   el.fups.innerHTML = d.fu.map(f => `<span>${f}</span>`).join('');
   setView('chart', d, false);
 }
@@ -156,13 +171,13 @@ function show(i, auto, kb) {
   if (!auto) touched = true;
   run && run.kill(); qc = QS[i]; lastPick = i;
   el.start.hidden = true; el.ans.hidden = false;
-  el.howrow.hidden = true; el.how.setAttribute('aria-expanded', false);
   fill(qc);
   if (calm) { renderText(qc, words2(qc).length); kb && $('#vback').focus({ preventScroll: true }); return; }
   const w = words2(qc), o = { n: 0 }, kp = $$('.kpi', el.kpis);
   renderText(qc, 0);
   const line = $('.ln', el.body), bars = $$('.bar', el.body);
   gsap.set([el.bub, ...kp, '.acard', '.ameta', el.fups], { opacity: 0, y: 12 });
+  gsap.set(el.rc, { yPercent: -108 });
   run = gsap.timeline()
     .to(el.bub, { opacity: 1, y: 0, duration: .4, ease: 'power3.out' })
     .to(o, { n: w.length, duration: w.length * .045, ease: 'none', onUpdate: () => renderText(qc, Math.round(o.n)) }, '>-.05')
@@ -177,11 +192,12 @@ function show(i, auto, kb) {
     gsap.set(fills, { scaleX: 0 }); gsap.set(vals, { opacity: 0 });
     run.to(fills, { scaleX: 1, duration: .8, stagger: .08, ease: 'power3.out' }, '<.1').to(vals, { opacity: 1, duration: .3, stagger: .08 }, '<.2');
   }
-  run.to(['.ameta', el.fups], { opacity: 1, y: 0, duration: .4, stagger: .1, ease: 'power2.out' }, '-=.4');
+  run.to(['.ameta', el.fups], { opacity: 1, y: 0, duration: .4, stagger: .1, ease: 'power2.out' }, '-=.4')
+    .to(el.rc, { yPercent: 0, duration: 1.5, ease: 'steps(18)' }, 1.1); // printed in steps, like paper from a till
   kb && $('#vback').focus({ preventScroll: true });
 }
 function back(kb) {
-  run && run.kill(); el.ans.hidden = true; el.start.hidden = false;
+  run && run.kill(); el.ans.hidden = true; el.start.hidden = false; el.rc.hidden = true; el.idle.hidden = false;
   if (!calm) gsap.from('#vstart > *', { opacity: 0, y: 10, duration: .4, stagger: .05, ease: 'power3.out' });
   const p = $(`.pick[data-i="${lastPick}"]`); kb && p && p.focus({ preventScroll: true });
 }
@@ -189,7 +205,6 @@ function back(kb) {
 $$('.pick').forEach(b => b.addEventListener('click', e => show(+b.dataset.i, false, e.detail === 0)));
 $('#vback').addEventListener('click', e => back(e.detail === 0));
 $$('.tg button').forEach(b => b.addEventListener('click', () => qc && setView(b.dataset.v, qc, true)));
-el.how.addEventListener('click', () => { const o = el.howrow.hidden; el.howrow.hidden = !o; el.how.setAttribute('aria-expanded', o); });
 $('#app').addEventListener('pointerdown', () => { touched = true; });
 // first visit: show the answer view once if the visitor has not touched it
 if (!calm) setTimeout(() => { if (!touched) show(0, true); }, 2800);
@@ -209,26 +224,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 // split headings into words
 $$('[data-split]').forEach(h => {
-  h.setAttribute('aria-label', h.textContent.replace(/\s*\|\s*/g, ' '));
-  h.innerHTML = h.textContent.trim().split(/\s+/).map(w => w === '|' ? '<br>' : `<span class="w" aria-hidden="true"><span>${w}</span></span>`).join(' ');
+  h.setAttribute('aria-label', h.textContent);
+  h.innerHTML = h.textContent.trim().split(/\s+/).map(w => `<span class="w" aria-hidden="true"><span>${w}</span></span>`).join(' ');
 });
 const wordsOf = h => $$('.w>span', h);
-gsap.from(wordsOf($('.hero h1')), { yPercent: 110, duration: 1, stagger: .07, ease: 'power4.out', delay: .1 });
-gsap.from('.hero .lead, .hero .cta-row', { y: 22, opacity: 0, duration: .9, stagger: .12, delay: .55, ease: 'power3.out' });
-gsap.from('.demo', { y: 50, opacity: 0, duration: 1.2, delay: .3, ease: 'power3.out' });
-$$('[data-split]').slice(1).forEach(h => gsap.from(wordsOf(h), {
-  yPercent: 110, duration: .9, stagger: .05, ease: 'power4.out',
-  scrollTrigger: { trigger: h, start: 'top 85%', once: true } }));
+// page load: one sequence. Headline, then the words beside it, then the stage rises
+gsap.timeline({ defaults: { ease: 'power4.out' } })
+  .from('.hl>span', { yPercent: 112, duration: 1.1, stagger: .12 }, .1)
+  .from('.kicker, .hero .lead, .hero .cta-row', { y: 20, opacity: 0, duration: .9, stagger: .1, ease: 'power3.out' }, .45)
+  .from('.hero-stage', { y: 70, opacity: 0, scale: .96, duration: 1.3, transformOrigin: '50% 0' }, .5)
+  .from('.sources', { opacity: 0, duration: .8 }, 1.2);
+$$('[data-split]').forEach(h => gsap.from(wordsOf(h), {
+  yPercent: 112, duration: .9, stagger: .045, ease: 'power4.out',
+  scrollTrigger: { trigger: h, start: 'top 88%', once: true } }));
 
-const reveal = (sel, vars = {}) => $$(sel).forEach(el => gsap.from(el, { y: 36, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, ...vars }));
-reveal('.sources');reveal('.tabs, .tabpanel'); reveal('.qa details', { y: 20 }); reveal('.flow'); reveal('.office', { y: 20 });
-/* feature chapters: text rises in, the visual slides in from its side */
-$$('.chap').forEach(c => {
-  const flip = c.classList.contains('flip');
-  gsap.timeline({ scrollTrigger: { trigger: c, start: 'top 78%', once: true } })
-    .from($$('.chap-text > *', c), { y: 26, opacity: 0, duration: .7, stagger: .09, ease: 'power3.out' })
-    .from($('.chap-vis', c), { x: flip ? -50 : 50, opacity: 0, duration: .9, ease: 'power3.out' }, .1);
-});
+const reveal = (sel, vars = {}) => $$(sel).forEach(el => gsap.from(el, { y: 32, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, ...vars }));
+reveal('.sec-head p, .tabs, .tabpanel, .said, .form'); reveal('.qa details, .office', { y: 18 }); reveal('.lane, .tile', { y: 44 });
+reveal('.models-in', { scale: .96, y: 50, duration: 1.1 }); reveal('.receipt-wrap.big', { y: 60, duration: 1.1 });
+// the footer wordmark rises as the page ends
+gsap.from('.wordmark', { yPercent: 35, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.foot', start: 'top bottom', end: 'bottom bottom', scrub: .6 } });
 const fxLoop = (id, tl) => ScrollTrigger.create({ trigger: id, start: 'top 80%', end: 'bottom 10%', onToggle: s => s.isActive ? tl.play() : tl.pause() });
 // 1: one question in four languages, then a clarifying question in the same language
 const LANGS = [
@@ -318,10 +332,4 @@ if (document.fonts) document.fonts.ready.then(remeasure);
 addEventListener('load', () => { remeasure(); const h = location.hash && document.querySelector(location.hash); if (h) h.scrollIntoView(); });
 $$('details').forEach(d => d.addEventListener('toggle', remeasure)); // opening an answer changes the height
 
-/* magnetic buttons */
-if (fine) $$('.magnetic').forEach(b => {
-  const x = gsap.quickTo(b, 'x', { duration: .4, ease: 'power3' }), y = gsap.quickTo(b, 'y', { duration: .4, ease: 'power3' });
-  b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); x((e.clientX - r.left - r.width / 2) * .25); y((e.clientY - r.top - r.height / 2) * .35); });
-  b.addEventListener('pointerleave', () => { x(0); y(0); });
-});
 })();

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GBI — Ask your data. Keep your data.</title>
 <meta name="description" content="GBI (Generative BI) gives executives plain-language answers from the company database. Model agnostic: run a local model inside your own network, or a hosted one under your own key.">
-<meta name="theme-color" content="#0a1f1a">
+<meta name="theme-color" content="#f1f4ef">
 <link rel="canonical" href="https://gbi.chat/">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -17,101 +17,146 @@
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Schibsted+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
+<!-- the ribbons of the logo, drawn once and reused on every dark stage -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="rg1" x1="0" x2="1"><stop offset="0" stop-color="#1c7550"/><stop offset=".5" stop-color="#8fd9b0"/><stop offset="1" stop-color="#1c7550"/></linearGradient>
+    <linearGradient id="rg2" x1="0" x2="1"><stop offset="0" stop-color="#0e3528"/><stop offset=".45" stop-color="#5fc294"/><stop offset="1" stop-color="#17573e"/></linearGradient>
+    <g id="rib" fill="none" stroke-linecap="round">
+      <path d="M-120 470C180 300 380 640 650 420S1040 170 1320 340" stroke="url(#rg1)" stroke-width="84" opacity=".3"/>
+      <path d="M-120 120C240 260 430-50 700 120S1090 430 1320 190" stroke="url(#rg2)" stroke-width="52" opacity=".34"/>
+      <path d="M-100 590C300 520 520 700 820 560S1140 470 1320 600" stroke="url(#rg2)" stroke-width="130" opacity=".22"/>
+      <path d="M-120 300C200 180 420 420 660 280S1060 60 1320 80" stroke="url(#rg1)" stroke-width="3" opacity=".5"/>
+    </g>
+  </defs>
+</svg>
+
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="GBI home">
-    <img src="assets/mark-512.png" width="36" height="36" alt="">
-    <span>GBI</span>
-  </a>
-  <nav id="menu" aria-label="Main">
-    <a href="#how">How it works</a>
-    <a href="#models">Any model</a>
-    <a href="#roles">Who it is for</a>
-    <a href="#trust">Trust</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <a class="btn btn-sm" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request access</a>
-  <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="GBI home">
+      <img src="assets/mark-512.png" width="34" height="34" alt="">
+      <span>GBI</span>
+    </a>
+    <nav id="menu" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#features">What it does</a>
+      <a href="#models">Any model</a>
+      <a href="#trust">Trust</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <a class="btn btn-sm" href="#contact">Request access</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i></button>
+  </div>
 </header>
 
 <main id="main">
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-copy">
-    <h1 data-split>Ask your data. | Keep your data.</h1>
-    <p class="lead">GBI answers executives in plain language, with every figure read straight from your own database and the steps behind it on show. It runs on the model you choose, including one inside your own network.</p>
-    <div class="cta-row">
-      <a class="btn magnetic" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request early access</a>
-      <a class="btn btn-ghost" href="#how">See how it works</a>
+  <div class="wrap hero-head">
+    <div>
+      <p class="kicker"><i></i>Generative BI · now in early access</p>
+      <h1 aria-label="Ask your data. Keep your data."><span class="hl" aria-hidden="true"><span>Ask your data.</span></span><span class="hl l2" aria-hidden="true"><span>Keep your data.</span></span></h1>
+    </div>
+    <div class="hero-sub">
+      <p class="lead">GBI answers executives in plain language. Every figure is read straight from your own database, and it comes with a receipt. It runs on the model you choose, including one inside your own network.</p>
+      <div class="cta-row">
+        <a class="btn" href="#contact">Request early access <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
     </div>
   </div>
 
-  <figure class="demo" id="app" aria-label="Interactive example of GBI. Pick a question to see an answer.">
-    <div class="demo-bar"><i></i><i></i><i></i><span>GBI · Ask</span><em>Illustrative data</em></div>
-    <div class="app-body">
-      <div class="view start" id="vstart">
-        <img class="gmark" src="assets/mark-512.png" width="44" height="44" alt="">
-        <p class="ttl">Ask GBI</p>
-        <p class="sub">Ask a question about your data in plain words. GBI answers first, then shows the table and a chart.</p>
-        <div class="finput" aria-hidden="true"><span>Ask a question about your data</span><i></i></div>
-        <p class="try">Try asking. Pick one:</p>
-        <div class="picks">
-          <button class="pick" type="button" data-i="0"><small>Trend</small><span>How did monthly orders change over time?</span></button>
-          <button class="pick" type="button" data-i="1"><small>Ranking</small><span>Which divisions are furthest ahead of plan?</span></button>
-          <button class="pick" type="button" data-i="2"><small>Total</small><span>What is the total amount of all claim payments?</span></button>
-          <button class="pick" type="button" data-i="3"><small>Count</small><span>How many customers were active this month?</span></button>
-        </div>
-      </div>
-      <div class="view answer" id="vans" hidden aria-live="polite">
-        <button class="back" id="vback" type="button">← New question</button>
-        <div class="bubble" id="abub"></div>
-        <p class="atext" id="atext"></p>
-        <div class="kpis" id="akpis"></div>
-        <div class="acard">
-          <div class="ahead"><b id="atitle"></b>
-            <div class="tg" role="group" aria-label="View"><button type="button" aria-pressed="true" data-v="chart">Chart</button><button type="button" aria-pressed="false" data-v="table">Table</button></div>
+  <div class="wrap">
+    <div class="stage hero-stage">
+      <svg class="ribbons" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#rib"/></svg>
+
+      <figure class="demo" id="app" aria-label="Interactive example of GBI. Pick a question to see an answer.">
+        <div class="demo-bar"><img src="assets/mark-512.png" width="20" height="20" alt=""><span>Ask GBI</span><em>Illustrative data</em></div>
+        <div class="app-body">
+          <div class="view start" id="vstart">
+            <p class="ttl">What do you want to know?</p>
+            <p class="sub">Ask in plain words. GBI answers first, then shows the table, a chart and the receipt.</p>
+            <div class="finput" aria-hidden="true"><span>Ask a question about your data</span><i></i></div>
+            <p class="try">Try one</p>
+            <div class="picks">
+              <button class="pick" type="button" data-i="0"><small>Trend</small><span>How did monthly orders change over time?</span></button>
+              <button class="pick" type="button" data-i="1"><small>Ranking</small><span>Which divisions are furthest ahead of plan?</span></button>
+              <button class="pick" type="button" data-i="2"><small>Total</small><span>What is the total amount of all claim payments?</span></button>
+              <button class="pick" type="button" data-i="3"><small>Count</small><span>How many customers were active this month?</span></button>
+            </div>
           </div>
-          <div class="abody" id="abody"></div>
+          <div class="view answer" id="vans" hidden aria-live="polite">
+            <button class="back" id="vback" type="button">← New question</button>
+            <div class="bubble" id="abub"></div>
+            <p class="atext" id="atext"></p>
+            <div class="kpis" id="akpis"></div>
+            <div class="acard">
+              <div class="ahead"><b id="atitle"></b>
+                <div class="tg" role="group" aria-label="View"><button type="button" aria-pressed="true" data-v="chart">Chart</button><button type="button" aria-pressed="false" data-v="table">Table</button></div>
+              </div>
+              <div class="abody" id="abody"></div>
+            </div>
+            <div class="ameta">
+              <span class="pill ok">High confidence</span><span class="pill">AI answer · not reviewed</span><span class="used" id="aused"></span>
+            </div>
+            <div class="fups" id="afups"></div>
+          </div>
         </div>
-        <div class="ameta">
-          <span class="pill ok">High confidence</span><span class="pill">AI answer · not reviewed</span><span class="used" id="aused"></span>
-          <button class="howbtn" id="ahow" type="button" aria-expanded="false">How I got this</button>
+      </figure>
+
+      <div class="printer">
+        <p class="printer-h">Receipt</p>
+        <div class="feed">
+          <p class="printer-idle" id="pidle">Pick a question. Its receipt prints here.</p>
+          <div class="receipt-wrap" id="hrc" hidden>
+            <div class="receipt">
+              <p class="rl"><span>Where this came from</span><span id="hrtime"></span></p>
+              <p class="rbig"><b id="hrv"></b><span id="hrk"></span></p>
+              <dl class="rrows" id="hrrows"></dl>
+              <p class="rnote">Read from the query result. Not written from memory.</p>
+            </div>
+            <div class="zig" aria-hidden="true"></div>
+          </div>
         </div>
-        <div class="howrow" id="ahowrow" hidden></div>
-        <div class="fups" id="afups"></div>
       </div>
     </div>
-  </figure>
-</section>
 
-<section class="sources" aria-label="Supported databases">
-  <p>Connects to the database you already run</p>
-  <ul>
-    <li>Oracle</li><li>SQL Server</li><li>MySQL</li><li>Databricks Unity Catalog</li><li>Snowflake</li><li>and more</li>
-  </ul>
+    <div class="sources" aria-label="Supported databases">
+      <p>Connects to the database you already run</p>
+      <ul>
+        <li><i class="ico" style="--i:url(assets/icons/oracle.svg)" aria-hidden="true"></i>Oracle</li><li><i class="ico" style="--i:url(assets/icons/microsoftsqlserver.svg)" aria-hidden="true"></i>SQL Server</li><li><i class="ico" style="--i:url(assets/icons/mysql.svg)" aria-hidden="true"></i>MySQL</li><li><i class="ico" style="--i:url(assets/icons/databricks.svg)" aria-hidden="true"></i>Databricks</li><li><i class="ico" style="--i:url(assets/icons/snowflake.svg)" aria-hidden="true"></i>Snowflake</li><li>and more</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <!-- GAP -->
-<section class="paper gap" id="gap">
-  <h2 data-split>Decisions should not wait in a data team’s queue.</h2>
-  <p class="gap-sub">Same question. Same database. Scroll to watch the two routes.</p>
-  <div class="race" id="race">
-    <div class="lane before" data-start="Waiting" data-mid="Still waiting" data-end="Days later">
-      <div class="lane-h"><h3>Without GBI</h3><span class="clock" aria-hidden="true">Waiting</span></div>
-      <ol class="track">
-        <li>Question</li><li>Ticket</li><li>Analyst queue</li><li>SQL</li><li>Spreadsheet</li><li>Slide</li><li>Answer</li>
-      </ol>
-    </div>
-    <div class="lane after" data-start="Ready" data-mid="On its way" data-end="Now">
-      <div class="lane-h"><h3>With GBI</h3><span class="clock" aria-hidden="true">Ready</span></div>
-      <ol class="track">
-        <li>Question</li><li>Answer</li>
-      </ol>
+<section class="sec gap" id="gap">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 data-split>Decisions should not wait in a data team’s queue.</h2>
+      <p>Same question. Same database. Scroll to watch the two routes.</p>
+    </header>
+    <div class="race" id="race">
+      <div class="lane before" data-start="Waiting" data-mid="Still waiting" data-end="Days later">
+        <div class="lane-h"><h3>Without GBI</h3><span class="clock" aria-hidden="true">Waiting</span></div>
+        <ol class="track">
+          <li>Question</li><li>Ticket</li><li>Analyst queue</li><li>SQL</li><li>Spreadsheet</li><li>Slide</li><li>Answer</li>
+        </ol>
+      </div>
+      <div class="lane after" data-start="Ready" data-mid="On its way" data-end="Now">
+        <svg class="ribbons" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#rib"/></svg>
+        <div class="lane-h"><h3>With GBI</h3><span class="clock" aria-hidden="true">Ready</span></div>
+        <ol class="track">
+          <li>Question</li><li>Answer</li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
@@ -122,12 +167,13 @@
     <div class="how-left">
       <h2>From database to answer in three moves.</h2>
       <ol class="steps" id="steps">
-        <li class="on"><span class="n">01</span><div><h3>Connect</h3><p>Add a data source in the admin console. GBI reads the schemas and tables it is allowed to see.</p></div></li>
-        <li><span class="n">02</span><div><h3>Model</h3><p>GBI builds a business model from what it finds: what a customer is, what “active” means, how sales join to regions. Your team reviews and corrects it. It stays current instead of being built once.</p></div></li>
-        <li><span class="n">03</span><div><h3>Ask</h3><p>People ask in their own language. GBI writes the SQL, runs it inside that person’s access, and answers in business terms.</p></div></li>
+        <li class="on"><span class="n">1</span><div><h3>Connect</h3><p>Add a data source in the admin console. GBI reads the schemas and tables it is allowed to see.</p></div></li>
+        <li><span class="n">2</span><div><h3>Model</h3><p>GBI builds a business model from what it finds: what a customer is, what “active” means, how sales join to regions. Your team reviews and corrects it.</p></div></li>
+        <li><span class="n">3</span><div><h3>Ask</h3><p>People ask in their own language. GBI writes the SQL, runs it inside that person’s access, and answers in business terms.</p></div></li>
       </ol>
     </div>
-    <div class="how-right" aria-hidden="true">
+    <div class="stage how-right" aria-hidden="true">
+      <svg class="ribbons" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice"><use href="#rib"/></svg>
       <div class="panel on" data-p="0">
         <div class="pl">Data sources</div>
         <ul class="srcs">
@@ -159,255 +205,305 @@
 </section>
 
 <!-- FEATURES -->
-<section class="paper feats" id="features">
-  <h2 data-split>Built for the executive who reads the answer, and the team who has to defend it.</h2>
-  <p class="gap-sub">Four things make an answer easy to ask for and safe to act on.</p>
+<section class="sec feats" id="features">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 data-split>Built for the executive who reads the answer, and the team who has to defend it.</h2>
+      <p>Four things make an answer easy to ask for and safe to act on.</p>
+    </header>
 
-  <article class="chap">
-    <div class="chap-text">
-      <h3>Ask in your own words</h3>
-      <p class="chap-lead">Nobody has to learn SQL, a dashboard or a new vocabulary. People ask the way they speak.</p>
-      <ul class="ticks">
-        <li>Any major language</li>
-        <li>On WhatsApp too, switched on by the admin</li>
-        <li>Type-ahead that suggests your own business terms</li>
-        <li>A clarifying question before any guess</li>
-      </ul>
-      <p class="why"><b>Why it matters</b> Questions stop waiting for the one person who knows SQL.</p>
-    </div>
-    <div class="chap-vis">
-      <div class="fx" id="fx1" aria-hidden="true">
-        <div class="fx-bar"><span>Ask GBI</span><em id="fx1lang">English</em></div>
-        <div class="fx-body">
-          <div class="fx-bub me" id="fx1q">How are sales this quarter?</div>
-          <div class="fx-bub gbi" id="fx1a"><b>Which period do you mean?</b><span class="fx-chips"><i>This quarter</i><i>Last quarter</i></span></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <article class="chap flip">
-    <div class="chap-text">
-      <h3>Teach it your business once</h3>
-      <p class="chap-lead">Tell GBI what “active customer” or “net revenue” means in your company. It remembers, and applies it everywhere.</p>
-      <ul class="ticks">
-        <li>Define a term, metric or rule once</li>
-        <li>It applies to every question after</li>
-        <li>Answers people mark as good become verified examples</li>
-        <li>The business model stays current, not built once</li>
-      </ul>
-      <p class="why"><b>Why it matters</b> Nobody has to re-explain the business each time they ask.</p>
-    </div>
-    <div class="chap-vis">
-      <div class="fx" id="fx2" aria-hidden="true">
-        <div class="fx-bar"><span>Admin · Business rules</span><em>New rule</em></div>
-        <div class="fx-body">
-          <div class="fx-field"><small>Term</small><span id="fx2t">Active customer</span></div>
-          <div class="fx-field"><small>Means</small><span id="fx2m">bought in the last 30 days</span></div>
-          <div class="fx-btn" id="fx2b">Save rule</div>
-          <div class="fx-ans" id="fx2ans"><small>The next question uses it</small><p><b>8,420</b> customers were active this month.</p><span class="fx-tags"><i>uses rule: Active customer</i><i class="brass" id="fx2v">✓ Verified example</i></span></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <article class="chap">
-    <div class="chap-text">
-      <h3>Access follows the person</h3>
-      <p class="chap-lead">The same question gives each person the answer they are allowed to see, and only that.</p>
-      <ul class="ticks">
-        <li>Row and column rules by role and attribute</li>
-        <li>Identity comes from the session, never from the question</li>
-        <li>Row limits and timeouts on every query</li>
-        <li>Try it: switch the role on the right</li>
-      </ul>
-      <p class="why"><b>Why it matters</b> You can open GBI to everyone without opening your data to everyone.</p>
-    </div>
-    <div class="chap-vis">
-      <div class="fx" id="fx3">
-        <div class="fx-bar"><span>Revenue by region</span>
-          <div class="fx-seg" role="group" aria-label="Role">
-            <button type="button" aria-pressed="true" data-u="exec">Executive</button>
-            <button type="button" aria-pressed="false" data-u="reg">Regional head</button>
+    <div class="bento">
+      <article class="tile w7">
+        <div class="tile-vis">
+          <div class="fx" id="fx1" aria-hidden="true">
+            <div class="fx-bar"><span>Ask GBI</span><em id="fx1lang">English</em></div>
+            <div class="fx-body">
+              <div class="fx-bub me" id="fx1q">How are sales this quarter?</div>
+              <div class="fx-bub gbi" id="fx1a"><b>Which period do you mean?</b><span class="fx-chips"><i>This quarter</i><i>Last quarter</i></span></div>
+            </div>
           </div>
         </div>
-        <div class="fx-body">
-          <div class="fx-bars" id="fx3bars"></div>
-          <p class="fx-note" id="fx3note" aria-live="polite">Rules applied: all regions</p>
+        <div class="tile-txt">
+          <h3>Ask in your own words</h3>
+          <p>Nobody has to learn SQL, a dashboard or a new vocabulary. Questions stop waiting for the one person who knows SQL.</p>
+          <ul class="ticks">
+            <li>Any major language</li>
+            <li>On WhatsApp too, switched on by the admin</li>
+            <li>Type-ahead that suggests your own business terms</li>
+            <li>A clarifying question before any guess</li>
+          </ul>
         </div>
-      </div>
-    </div>
-  </article>
+      </article>
 
-  <article class="chap flip">
-    <div class="chap-text">
-      <h3>It reaches the people who need it</h3>
-      <p class="chap-lead">An answer is only useful when it gets to the right person, in time to matter.</p>
-      <ul class="ticks">
-        <li>Pin any answer to a personal or shared dashboard</li>
-        <li>Scheduled reports and alerts for each department</li>
-        <li>Share an answer as a link</li>
-        <li>Export to CSV or Excel</li>
-      </ul>
-      <p class="why"><b>Why it matters</b> The right number reaches the right person without anyone having to ask.</p>
-    </div>
-    <div class="chap-vis">
-      <div class="fx" id="fx4" aria-hidden="true">
-        <div class="fx-bar"><span>Regional sales dashboard</span><em>Shared</em></div>
-        <div class="fx-body">
-          <div class="fx-tiles">
-            <div><small>Revenue</small><b class="hot">1.2m</b><em>▲ 8% vs last week</em><svg class="spark" viewBox="0 0 100 24" preserveAspectRatio="none"><path d="M0 20 L12 17 L24 18 L36 12 L48 14 L60 8 L72 10 L84 4 L100 2"/></svg></div>
-            <div><small>Orders</small><b>1,220</b><em>▲ 3% vs last week</em><svg class="spark" viewBox="0 0 100 24" preserveAspectRatio="none"><path d="M0 16 L12 18 L24 13 L36 15 L48 10 L60 12 L72 8 L84 9 L100 5"/></svg></div>
+      <article class="tile w5">
+        <div class="tile-vis">
+          <div class="fx" id="fx2" aria-hidden="true">
+            <div class="fx-bar"><span>Admin · Business rules</span><em>New rule</em></div>
+            <div class="fx-body">
+              <div class="fx-field"><small>Term</small><span id="fx2t">Active customer</span></div>
+              <div class="fx-field"><small>Means</small><span id="fx2m">bought in the last 30 days</span></div>
+              <div class="fx-btn" id="fx2b">Save rule</div>
+              <div class="fx-ans" id="fx2ans"><small>The next question uses it</small><p><b>8,420</b> customers were active this month.</p><span class="fx-tags"><i>uses rule: Active customer</i><i class="hot" id="fx2v">✓ Verified example</i></span></div>
+            </div>
           </div>
-          <ul class="fx-list"><li><span>Weekly returns report</span><em>Every Monday</em></li><li><span>Alert: returns above 8%</span><em>On</em></li></ul>
-          <div class="fx-toast" id="fx4t"><b>Alert</b> Returns passed 8% in Outdoor</div>
-          <div class="fx-tags"><i>Link</i><i>CSV</i><i>Excel</i></div>
         </div>
-      </div>
-    </div>
-  </article>
+        <div class="tile-txt">
+          <h3>Teach it your business once</h3>
+          <p>Tell GBI what “active customer” or “net revenue” means in your company. It remembers, and applies it to every question after.</p>
+          <ul class="ticks">
+            <li>Define a term, metric or rule once</li>
+            <li>Answers people mark as good become verified examples</li>
+            <li>The business model stays current, not built once</li>
+          </ul>
+        </div>
+      </article>
 
-  <p class="chap-foot">Every answer also shows how it was made: the tables, the filters and, for analysts, the SQL. <a href="#trust">See a receipt</a></p>
+      <article class="tile w5">
+        <div class="tile-vis">
+          <div class="fx" id="fx3">
+            <div class="fx-bar"><span>Revenue by region</span>
+              <div class="fx-seg" role="group" aria-label="Role">
+                <button type="button" aria-pressed="true" data-u="exec">Executive</button>
+                <button type="button" aria-pressed="false" data-u="reg">Regional head</button>
+              </div>
+            </div>
+            <div class="fx-body">
+              <div class="fx-bars" id="fx3bars"></div>
+              <p class="fx-note" id="fx3note" aria-live="polite">Rules applied: all regions</p>
+            </div>
+          </div>
+        </div>
+        <div class="tile-txt">
+          <h3>Access follows the person</h3>
+          <p>The same question gives each person the answer they are allowed to see, and only that. Switch the role above to try it.</p>
+          <ul class="ticks">
+            <li>Row and column rules by role and attribute</li>
+            <li>Identity comes from the session, never from the question</li>
+            <li>Row limits and timeouts on every query</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tile w7">
+        <div class="tile-vis">
+          <div class="fx" id="fx4" aria-hidden="true">
+            <div class="fx-bar"><span>Regional sales dashboard</span><em>Shared</em></div>
+            <div class="fx-body">
+              <div class="fx-tiles">
+                <div><small>Revenue</small><b class="hot">1.2m</b><em>▲ 8% vs last week</em><svg class="spark" viewBox="0 0 100 24" preserveAspectRatio="none"><path d="M0 20 L12 17 L24 18 L36 12 L48 14 L60 8 L72 10 L84 4 L100 2"/></svg></div>
+                <div><small>Orders</small><b>1,220</b><em>▲ 3% vs last week</em><svg class="spark" viewBox="0 0 100 24" preserveAspectRatio="none"><path d="M0 16 L12 18 L24 13 L36 15 L48 10 L60 12 L72 8 L84 9 L100 5"/></svg></div>
+              </div>
+              <ul class="fx-list"><li><span>Weekly returns report</span><em>Every Monday</em></li><li><span>Alert: returns above 8%</span><em>On</em></li></ul>
+              <div class="fx-toast" id="fx4t"><b>Alert</b> Returns passed 8% in Outdoor</div>
+            </div>
+          </div>
+        </div>
+        <div class="tile-txt">
+          <h3>It reaches the people who need it</h3>
+          <p>An answer is only useful when it gets to the right person, in time to matter.</p>
+          <ul class="ticks">
+            <li>Pin any answer to a personal or shared dashboard</li>
+            <li>Scheduled reports and alerts for each department</li>
+            <li>Share an answer as a link</li>
+            <li>Export to CSV or Excel</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
 </section>
 
 <!-- MODELS -->
 <section class="models" id="models">
-  <div class="models-in">
-    <div class="models-copy">
-      <h2 data-split>Any model. Yours to choose, and to change.</h2>
-      <p>GBI is not tied to one AI provider. Run an open model on your own hardware so nothing leaves the building. Use a hosted model under your own key. Move from one to the other when your policy, your budget or the market changes.</p>
-      <div class="seg" role="tablist" aria-label="Where the model runs">
-        <button role="tab" aria-selected="true" data-mode="local" id="m0" aria-controls="flow">On your servers</button>
-        <button role="tab" aria-selected="false" data-mode="hosted" id="m1" aria-controls="flow" tabindex="-1">Hosted, your key</button>
+  <div class="wrap">
+    <div class="stage models-in">
+      <svg class="ribbons" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#rib"/></svg>
+      <div class="models-copy">
+        <h2 data-split>Any model. Yours to choose, and to change.</h2>
+        <p>GBI is not tied to one AI provider. Run an open model on your own hardware so nothing leaves the building. Use a hosted model under your own key. Move from one to the other when your policy, your budget or the market changes.</p>
+        <div class="seg" role="tablist" aria-label="Where the model runs">
+          <button role="tab" aria-selected="true" data-mode="local" id="m0" aria-controls="flow">On your servers</button>
+          <button role="tab" aria-selected="false" data-mode="hosted" id="m1" aria-controls="flow" tabindex="-1">Hosted, your key</button>
+        </div>
       </div>
-    </div>
-    <div class="flow local" id="flow" role="tabpanel" aria-labelledby="m0">
-      <div class="nodes">
-        <div class="perimeter"><span>Your network</span></div>
-        <div class="node"><small>Source</small><b>Your database</b></div>
-        <div class="node core"><small>Engine</small><b>GBI</b></div>
-        <div class="node model"><small id="mkind">Local model</small><b id="mname">Open models via Ollama</b></div>
+      <div class="flow local" id="flow" role="tabpanel" aria-labelledby="m0">
+        <div class="nodes">
+          <div class="perimeter"><span>Your network</span></div>
+          <div class="node"><small>Source</small><b>Your database</b></div>
+          <div class="node core"><small>Engine</small><b>GBI</b></div>
+          <div class="node model"><small id="mkind">Local model</small><b id="mname">Open models via Ollama</b></div>
+        </div>
+        <p class="flowcap" id="flowcap">Questions, schema and results stay inside your network. The model runs on your own hardware.</p>
       </div>
-      <p class="flowcap" id="flowcap">Questions, schema and results stay inside your network. The model runs on your own hardware.</p>
     </div>
   </div>
 </section>
 
 <!-- ROLES -->
-<section class="paper roles" id="roles">
-  <h2>From the boardroom to every team.</h2>
-  <p class="gap-sub">Start with leadership. Then give everyone who asks questions the same trusted answers. Here is what each group gets.</p>
-  <div class="tabs" role="tablist" aria-label="Who uses GBI">
-    <button role="tab" aria-selected="true" aria-controls="r0" id="t0">Leadership</button>
-    <button role="tab" aria-selected="false" aria-controls="r3" id="t3" tabindex="-1">Every team</button>
-    <button role="tab" aria-selected="false" aria-controls="r1" id="t1" tabindex="-1">Data teams</button>
-    <button role="tab" aria-selected="false" aria-controls="r2" id="t2" tabindex="-1">IT and security</button>
-  </div>
-  <div class="tabpanel" role="tabpanel" id="r0" aria-labelledby="t0">
-    <p class="big">Ask the number. Get the answer. Decide.</p>
-    <ul><li>Starter questions for your role on the home screen</li><li>One-click follow-ups: “break down by region”, “compare to last year”</li><li>Dashboards, scheduled reports and alerts for your department</li><li>Share an answer by link, or export it to Excel</li></ul>
-  </div>
-  <div class="tabpanel" role="tabpanel" id="r3" aria-labelledby="t3" hidden>
-    <p class="big">Anyone who can ask a question can get an answer.</p>
-    <ul><li>Sales, finance, operations, HR or support: ask in your own words and your own language</li><li>Type-ahead that suggests your own business terms</li><li>A clarifying question when yours is vague, before any guess</li><li>You see only the data your role allows</li></ul>
-  </div>
-  <div class="tabpanel" role="tabpanel" id="r1" aria-labelledby="t1" hidden>
-    <p class="big">See the SQL. Own the business model.</p>
-    <ul><li>Open and edit the SQL behind any answer</li><li>Run your own SQL through the governed query tool</li><li>Drill-down, statistics and forecasts</li><li>Teach terms and metrics once, save queries and views</li></ul>
-  </div>
-  <div class="tabpanel" role="tabpanel" id="r2" aria-labelledby="t2" hidden>
-    <p class="big">Run it your way, inside your rules.</p>
-    <ul><li>Row and column access by role and attribute</li><li>Local model or hosted model, your choice, switchable</li><li>One admin console for sources, rules and models</li><li>Answer quality tracked against golden questions</li></ul>
+<section class="sec roles" id="roles">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2>From the boardroom to every team.</h2>
+      <p>Start with leadership. Then give everyone who asks questions the same trusted answers.</p>
+    </header>
+    <div class="tabs" role="tablist" aria-label="Who uses GBI">
+      <button role="tab" aria-selected="true" aria-controls="r0" id="t0">Leadership</button>
+      <button role="tab" aria-selected="false" aria-controls="r3" id="t3" tabindex="-1">Every team</button>
+      <button role="tab" aria-selected="false" aria-controls="r1" id="t1" tabindex="-1">Data teams</button>
+      <button role="tab" aria-selected="false" aria-controls="r2" id="t2" tabindex="-1">IT and security</button>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="r0" aria-labelledby="t0">
+      <p class="big">Ask the number. Get the answer. Decide.</p>
+      <ul><li>Starter questions for your role on the home screen</li><li>One-click follow-ups: “break down by region”, “compare to last year”</li><li>Dashboards, scheduled reports and alerts for your department</li><li>Share an answer by link, or export it to Excel</li></ul>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="r3" aria-labelledby="t3" hidden>
+      <p class="big">Anyone who can ask a question can get an answer.</p>
+      <ul><li>Sales, finance, operations, HR or support: ask in your own words and your own language</li><li>Type-ahead that suggests your own business terms</li><li>A clarifying question when yours is vague, before any guess</li><li>You see only the data your role allows</li></ul>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="r1" aria-labelledby="t1" hidden>
+      <p class="big">See the SQL. Own the business model.</p>
+      <ul><li>Open and edit the SQL behind any answer</li><li>Run your own SQL through the governed query tool</li><li>Drill-down, statistics and forecasts</li><li>Teach terms and metrics once, save queries and views</li></ul>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="r2" aria-labelledby="t2" hidden>
+      <p class="big">Run it your way, inside your rules.</p>
+      <ul><li>Row and column access by role and attribute</li><li>Local model or hosted model, your choice, switchable</li><li>One admin console for sources, rules and models</li><li>Answer quality tracked against golden questions</li></ul>
+    </div>
   </div>
 </section>
 
 <!-- TRUST -->
-<section class="trust" id="trust">
-  <div class="trust-in">
-    <div class="trust-copy">
-      <h2 data-split>Every number has a receipt.</h2>
-      <p>The figures in an answer are not written from memory. Each one is read from a query that ran on your own data source, and it carries the tables, the filters and the access rules behind it. A board member can ask where a number came from, and the answer is one click away.</p>
-      <p class="hint">Click a figure to see its receipt.</p>
-      <div class="said" id="said">
-        Retail is <button type="button" class="fig" aria-pressed="true" data-r="0">14.2%</button> above plan, ahead of Wholesale at <button type="button" class="fig" aria-pressed="false" data-r="1">9.8%</button>. Online is on plan at <button type="button" class="fig" aria-pressed="false" data-r="2">0.2%</button>.
+<section class="sec trust" id="trust">
+  <div class="wrap">
+    <div class="trust-in">
+      <div class="trust-copy">
+        <h2 data-split>Every number has a receipt.</h2>
+        <p>The figures in an answer are not written from memory. Each one is read from a query that ran on your own data source, and it carries the tables, the filters and the access rules behind it. A board member can ask where a number came from, and the answer is one click away.</p>
+        <p class="hint">Click a figure to print its receipt</p>
+        <div class="said" id="said">
+          Retail is <button type="button" class="fig" aria-pressed="true" data-r="0">14.2%</button> above plan, ahead of Wholesale at <button type="button" class="fig" aria-pressed="false" data-r="1">9.8%</button>. Online is on plan at <button type="button" class="fig" aria-pressed="false" data-r="2">0.2%</button>.
+        </div>
       </div>
-    </div>
-    <div class="receipt-wrap" id="receipt" aria-live="polite">
-      <div class="receipt">
-        <p class="rl">Receipt · where this number came from</p>
-        <p class="rbig"><b id="rv">14.2%</b><span id="rk">Retail against plan, this quarter</span></p>
-        <dl class="rrows">
-          <div><dt>Source</dt><dd id="rsrc">sales_orders, plan_targets</dd></div>
-          <div><dt>Filter</dt><dd id="rflt">this quarter · division = Retail</dd></div>
-          <div><dt>Rows read</dt><dd id="rrows">5</dd></div>
-          <div><dt>Access</dt><dd>Executive role · all divisions</dd></div>
-        </dl>
-        <pre class="rsql" id="rsql" aria-label="SQL that produced this figure">SELECT d.name, 100 * (SUM(s.amount) / p.target - 1) AS vs_plan
+      <div class="receipt-wrap big" id="receipt" aria-live="polite">
+        <div class="receipt">
+          <p class="rl"><span>Receipt · where this number came from</span></p>
+          <p class="rbig"><b id="rv">14.2%</b><span id="rk">Retail against plan, this quarter</span></p>
+          <dl class="rrows">
+            <div><dt>Source</dt><dd id="rsrc">sales_orders, plan_targets</dd></div>
+            <div><dt>Filter</dt><dd id="rflt">this quarter · division = Retail</dd></div>
+            <div><dt>Rows read</dt><dd id="rrows">5</dd></div>
+            <div><dt>Access</dt><dd>Executive role · all divisions</dd></div>
+          </dl>
+          <pre class="rsql" id="rsql" aria-label="SQL that produced this figure">SELECT d.name, 100 * (SUM(s.amount) / p.target - 1) AS vs_plan
 FROM sales_orders s JOIN plan_targets p ON p.division_id = s.division_id
 WHERE s.quarter = 'this' AND d.name = 'Retail'
 GROUP BY d.name, p.target</pre>
-        <p class="rnote">Analysts and admins can open and edit this SQL.</p>
+          <p class="rnote">Analysts and admins can open and edit this SQL.</p>
+        </div>
+        <div class="zig" aria-hidden="true"></div>
       </div>
-      <div class="zig" aria-hidden="true"></div>
     </div>
+    <ul class="rows">
+      <li><b>Straight from your source</b><span>Every figure comes from a query on your own database, with the tables and filters shown beside it.</span></li>
+      <li><b>Your data stays yours</b><span>Run it on your own machines. With a local model, questions and data stay inside your network.</span></li>
+      <li><b>Identity from the session</b><span>Never from the question. People cannot ask their way past their access.</span></li>
+      <li><b>Row limits and timeouts</b><span>On every query, set in the connector or the database user.</span></li>
+      <li><b>Any dialect, any domain</b><span>GBI learns your schema and terms. Nothing is tuned to one industry or one database.</span></li>
+      <li><b>Measured before release</b><span>A quality lab scores GBI against golden questions before each release.</span></li>
+    </ul>
   </div>
-  <ul class="rows">
-    <li><b>Straight from your source</b><span>every figure comes from a query on your own database, with the tables and filters shown beside it.</span></li>
-    <li><b>Your data stays yours</b><span>run it on your own machines. With a local model, questions and data stay inside your network.</span></li>
-    <li><b>Identity from the session</b><span>never from the question. People cannot ask their way past their access.</span></li>
-    <li><b>Row limits and timeouts</b><span>on every query, set in the connector or the database user.</span></li>
-    <li><b>Any dialect, any domain</b><span>GBI learns your schema and terms. Nothing is tuned to one industry or one database.</span></li>
-    <li><b>Measured before release</b><span>a quality lab scores GBI against golden questions before each release.</span></li>
-  </ul>
 </section>
 
 <!-- FAQ -->
-<section class="paper faq" id="faq">
-  <h2>Questions executives ask first</h2>
-  <div class="qa">
-    <details><summary>How do I know the numbers are right?</summary><p>Each figure comes from a query run on your own data source, not from a model’s memory. Every answer shows the tables and filters it used, and analysts can open the SQL. Each answer also carries a confidence label, and GBI is scored against golden questions before every release.</p></details>
-    <details><summary>Does my data go to an AI provider?</summary><p>Only if the admin chooses a hosted model. With a local model, questions, schema and results stay inside your network. With a hosted model, that provider receives what the model needs to answer, under your own API key.</p></details>
-    <details><summary>Which models can GBI use?</summary><p>Any the admin adds: open models run locally through Ollama, or hosted ones such as Anthropic, OpenAI and Gemini. You can switch later without rebuilding anything.</p></details>
-    <details><summary>Which databases does it connect to?</summary><p>Oracle, SQL Server, MySQL, Databricks Unity Catalog, Snowflake and others. GBI takes the SQL dialect from the data source.</p></details>
-    <details><summary>Can two people see different answers to the same question?</summary><p>Yes, when their access differs. Row and column rules apply to each person, so a regional head and a finance lead see what each is allowed to see.</p></details>
-    <details><summary>Do my people need to know SQL?</summary><p>No. They write a question. Analysts and admins can open the SQL to check or change it.</p></details>
-    <details><summary>Is GBI available today?</summary><p>GBI is in early access. Request access and we will arrange a first session on your own data.</p></details>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-in">
-    <div class="contact-copy">
-      <h2 data-split>Bring a question your team is still waiting on.</h2>
-      <p>Tell us which database and which question. We will arrange a first session on your own data.</p>
-      <a class="btn btn-lg magnetic" href="mailto:hello@gbi.chat?subject=GBI%20early%20access">Request early access</a>
+<section class="sec faq" id="faq">
+  <div class="wrap faq-in">
+    <h2>Questions executives ask first</h2>
+    <div class="qa">
+      <details><summary>How do I know the numbers are right?</summary><p>Each figure comes from a query run on your own data source, not from a model’s memory. Every answer shows the tables and filters it used, and analysts can open the SQL. Each answer also carries a confidence label, and GBI is scored against golden questions before every release.</p></details>
+      <details><summary>Does my data go to an AI provider?</summary><p>Only if the admin chooses a hosted model. With a local model, questions, schema and results stay inside your network. With a hosted model, that provider receives what the model needs to answer, under your own API key.</p></details>
+      <details><summary>Which models can GBI use?</summary><p>Any the admin adds: open models run locally through Ollama, or hosted ones such as Anthropic, OpenAI and Gemini. You can switch later without rebuilding anything.</p></details>
+      <details><summary>Which databases does it connect to?</summary><p>Oracle, SQL Server, MySQL, Databricks Unity Catalog, Snowflake and others. GBI takes the SQL dialect from the data source.</p></details>
+      <details><summary>Can two people see different answers to the same question?</summary><p>Yes, when their access differs. Row and column rules apply to each person, so a regional head and a finance lead see what each is allowed to see.</p></details>
+      <details><summary>Do my people need to know SQL?</summary><p>No. They write a question. Analysts and admins can open the SQL to check or change it.</p></details>
+      <details><summary>Is GBI available today?</summary><p>GBI is in early access. Request access and we will arrange a first session on your own data.</p></details>
     </div>
-    <ul class="offices" aria-label="Offices">
-      <li class="office">
-        <span class="pole" aria-hidden="true"><span class="flag"><svg viewBox="0 0 30 20"><rect width="30" height="10" fill="#ee2536"/><rect y="10" width="30" height="10" fill="#fff"/><circle cx="7" cy="5" r="3.6" fill="#fff"/><circle cx="8.4" cy="5" r="3.3" fill="#ee2536"/><g fill="#fff"><circle cx="11.4" cy="2.3" r=".75"/><circle cx="13.6" cy="3.9" r=".75"/><circle cx="12.8" cy="6.5" r=".75"/><circle cx="10" cy="6.5" r=".75"/><circle cx="9.2" cy="3.9" r=".75"/></g></svg></span></span>
-        <div class="where"><b>Singapore</b><em>International Business Park (IBP)</em></div>
-        <time class="otime" data-tz="Asia/Singapore"></time>
-      </li>
-      <li class="office">
-        <span class="pole" aria-hidden="true"><span class="flag"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><g fill="#cc0001"><rect y="0" width="30" height="1.43"/><rect y="2.86" width="30" height="1.43"/><rect y="5.71" width="30" height="1.43"/><rect y="8.57" width="30" height="1.43"/><rect y="11.43" width="30" height="1.43"/><rect y="14.29" width="30" height="1.43"/><rect y="17.14" width="30" height="1.43"/></g><rect width="15" height="10" fill="#010066"/><circle cx="5.6" cy="5" r="3.1" fill="#fc0"/><circle cx="6.5" cy="5" r="2.6" fill="#010066"/><polygon fill="#fc0" points="8.60,2.30 8.93,3.54 9.77,2.57 9.54,3.83 10.71,3.32 9.95,4.35 11.23,4.40 10.10,5.00 11.23,5.60 9.95,5.65 10.71,6.68 9.54,6.17 9.77,7.43 8.93,6.46 8.60,7.70 8.27,6.46 7.43,7.43 7.66,6.17 6.49,6.68 7.25,5.65 5.97,5.60 7.10,5.00 5.97,4.40 7.25,4.35 6.49,3.32 7.66,3.83 7.43,2.57 8.27,3.54"/></svg></span></span>
-        <div class="where"><b>Malaysia</b><em>Cyberjaya</em></div>
-        <time class="otime" data-tz="Asia/Kuala_Lumpur"></time>
-      </li>
-      <li class="office">
-        <span class="pole" aria-hidden="true"><span class="flag"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><g fill="#b22234"><rect y="0" width="30" height="1.54"/><rect y="3.08" width="30" height="1.54"/><rect y="6.15" width="30" height="1.54"/><rect y="9.23" width="30" height="1.54"/><rect y="12.31" width="30" height="1.54"/><rect y="15.38" width="30" height="1.54"/><rect y="18.46" width="30" height="1.54"/></g><rect width="12" height="10.77" fill="#3c3b6e"/><g fill="#fff"><circle cx="2" cy="2" r=".6"/><circle cx="4.7" cy="2" r=".6"/><circle cx="7.4" cy="2" r=".6"/><circle cx="10" cy="2" r=".6"/><circle cx="3.3" cy="4.5" r=".6"/><circle cx="6" cy="4.5" r=".6"/><circle cx="8.7" cy="4.5" r=".6"/><circle cx="2" cy="7" r=".6"/><circle cx="4.7" cy="7" r=".6"/><circle cx="7.4" cy="7" r=".6"/><circle cx="10" cy="7" r=".6"/><circle cx="3.3" cy="9.2" r=".6"/><circle cx="6" cy="9.2" r=".6"/><circle cx="8.7" cy="9.2" r=".6"/></g></svg></span></span>
-        <div class="where"><b>USA</b><em>Reseda, California</em></div>
-        <time class="otime" data-tz="America/Los_Angeles"></time>
-      </li>
-    </ul>
   </div>
 </section>
 </main>
 
-<footer class="foot">
-  <a class="brand" href="#top"><img src="assets/mark-512.png" width="28" height="28" alt=""><span>GBI · Generative BI</span></a>
-  <span>© 2026 GBI · gbi.chat</span>
-</footer>
+<!-- CONTACT + FOOTER: one dark close -->
+<div class="finale">
+  <svg class="ribbons" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#rib"/></svg>
+  <section class="contact" id="contact">
+    <div class="wrap contact-in">
+      <div class="contact-copy">
+        <h2 data-split>Bring a question your team is still waiting on.</h2>
+        <p>Tell us which database and which question. We will arrange a first session on your own data.</p>
+        <div class="wa-row">
+          <a class="btn btn-wa" href="https://wa.me/60172639699" target="_blank" rel="noopener"><i class="ico" style="--i:url(assets/icons/whatsapp.svg)" aria-hidden="true"></i>WhatsApp +60 17-263 9699</a>
+          <a class="btn btn-wa" href="https://wa.me/8801712651345" target="_blank" rel="noopener"><i class="ico" style="--i:url(assets/icons/whatsapp.svg)" aria-hidden="true"></i>WhatsApp +880 1712-651345</a>
+        </div>
+        <ul class="offices" aria-label="Offices">
+          <li class="office">
+            <span class="flag" aria-hidden="true"><svg viewBox="0 0 30 20"><rect width="30" height="10" fill="#ee2536"/><rect y="10" width="30" height="10" fill="#fff"/><circle cx="7" cy="5" r="3.6" fill="#fff"/><circle cx="8.4" cy="5" r="3.3" fill="#ee2536"/><g fill="#fff"><circle cx="11.4" cy="2.3" r=".75"/><circle cx="13.6" cy="3.9" r=".75"/><circle cx="12.8" cy="6.5" r=".75"/><circle cx="10" cy="6.5" r=".75"/><circle cx="9.2" cy="3.9" r=".75"/></g></svg></span>
+            <div class="where"><b>Singapore</b><em>International Business Park (IBP)</em></div>
+            <time class="otime" data-tz="Asia/Singapore"></time>
+          </li>
+          <li class="office">
+            <span class="flag" aria-hidden="true"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><g fill="#cc0001"><rect y="0" width="30" height="1.43"/><rect y="2.86" width="30" height="1.43"/><rect y="5.71" width="30" height="1.43"/><rect y="8.57" width="30" height="1.43"/><rect y="11.43" width="30" height="1.43"/><rect y="14.29" width="30" height="1.43"/><rect y="17.14" width="30" height="1.43"/></g><rect width="15" height="10" fill="#010066"/><circle cx="5.6" cy="5" r="3.1" fill="#fc0"/><circle cx="6.5" cy="5" r="2.6" fill="#010066"/><polygon fill="#fc0" points="8.60,2.30 8.93,3.54 9.77,2.57 9.54,3.83 10.71,3.32 9.95,4.35 11.23,4.40 10.10,5.00 11.23,5.60 9.95,5.65 10.71,6.68 9.54,6.17 9.77,7.43 8.93,6.46 8.60,7.70 8.27,6.46 7.43,7.43 7.66,6.17 6.49,6.68 7.25,5.65 5.97,5.60 7.10,5.00 5.97,4.40 7.25,4.35 6.49,3.32 7.66,3.83 7.43,2.57 8.27,3.54"/></svg></span>
+            <div class="where"><b>Malaysia</b><em>Cyberjaya</em></div>
+            <time class="otime" data-tz="Asia/Kuala_Lumpur"></time>
+          </li>
+          <li class="office">
+            <span class="flag" aria-hidden="true"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#006a4e"/><circle cx="13.5" cy="10" r="6" fill="#f42a41"/></svg></span>
+            <div class="where"><b>Bangladesh</b><em><a href="https://wa.me/8801712651345" target="_blank" rel="noopener">WhatsApp +880 1712-651345</a></em></div>
+            <time class="otime" data-tz="Asia/Dhaka"></time>
+          </li>
+        </ul>
+      </div>
+
+      <form class="form" id="reqform">
+        <p class="form-h">Request early access</p>
+        <label>Your name<input name="name" autocomplete="name" required></label>
+        <label>Company<input name="company" autocomplete="organization" required></label>
+        <label>Your role<input name="role" autocomplete="organization-title" placeholder="CFO, Head of Data"></label>
+        <label>Main database
+          <select name="db">
+            <option>Oracle</option><option>SQL Server</option><option>MySQL</option><option>Databricks</option><option>Snowflake</option><option>Another one</option>
+          </select>
+        </label>
+        <label class="wide">The question your team is waiting on<textarea name="q" rows="3" placeholder="For example: Which regions are behind plan this quarter, and why?"></textarea></label>
+        <button class="btn btn-lg wide" type="submit">Request early access <span class="arr" aria-hidden="true">→</span></button>
+        <p class="form-note wide" id="formnote" aria-live="polite">This opens your email app with the request ready to send. Or write to <a href="mailto:hello@gbi.chat">hello@gbi.chat</a>, or message us on <a href="https://wa.me/60172639699" target="_blank" rel="noopener">WhatsApp</a>.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div class="foot-brand">
+        <a class="brand" href="#top"><img src="assets/mark-512.png" width="34" height="34" alt=""><span>GBI</span></a>
+        <p>Generative BI. Plain-language answers from the company database, each figure with its receipt.</p>
+      </div>
+      <nav aria-label="Product">
+        <p class="foot-h">Product</p>
+        <a href="#how">How it works</a><a href="#features">What it does</a><a href="#models">Any model</a><a href="#trust">Trust</a>
+      </nav>
+      <nav aria-label="More">
+        <p class="foot-h">More</p>
+        <a href="#roles">Who it is for</a><a href="#faq">Questions</a><a href="#contact">Request access</a>
+      </nav>
+      <div>
+        <p class="foot-h">Write to us</p>
+        <a href="mailto:hello@gbi.chat">hello@gbi.chat</a>
+        <a href="https://wa.me/60172639699" target="_blank" rel="noopener">WhatsApp +60 17-263 9699</a>
+        <a href="https://wa.me/8801712651345" target="_blank" rel="noopener">WhatsApp +880 1712-651345</a>
+        <span>Singapore · Malaysia · Bangladesh</span>
+      </div>
+    </div>
+    <p class="wordmark" aria-hidden="true">gbi.chat</p>
+    <div class="wrap foot-base"><span>© 2026 GBI · Generative BI</span><a href="#top">Back to top ↑</a></div>
+  </footer>
+</div>
 
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
