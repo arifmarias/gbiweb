@@ -21,7 +21,7 @@ $('#reqform').addEventListener('submit', e => {
   const f = new FormData(e.target), g = k => (f.get(k) || '').trim();
   const body = `Name: ${g('name')}\nCompany: ${g('company')}\nRole: ${g('role')}\nMain database: ${g('db')}\n\nThe question we are waiting on:\n${g('q')}\n`;
   location.href = `mailto:hello@gbi.chat?subject=${encodeURIComponent('GBI early access: ' + g('company'))}&body=${encodeURIComponent(body)}`;
-  $('#formnote').textContent = 'Your email app now has the request. Send it to finish. No email app? Write to hello@gbi.chat or WhatsApp +60 17-263 9699.';
+  $('#formnote').textContent = 'Your email app now has the request. Send it to finish. No email app? Write to hello@gbi.chat or message us on WhatsApp.';
 });
 
 /* tabs: roles, model mode, offices */
