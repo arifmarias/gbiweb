@@ -83,7 +83,6 @@ h3{font-size:1.35rem;letter-spacing:-.02em;line-height:1.15}
 .hl>span{display:block;will-change:transform}
 .hl.l2{color:var(--leaf)}
 .lead{font-size:clamp(1.02rem,1.25vw,1.14rem);color:var(--ink2);max-width:33em}
-.demo-note{margin-top:12px;font-size:.88rem;color:var(--ink2)}
 .cta-row{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
 
 /* stage: the dark surface the product is shown on */
