@@ -84,6 +84,10 @@ h3{font-size:1.35rem;letter-spacing:-.02em;line-height:1.15}
 .hl.l2{color:var(--leaf)}
 .lead{font-size:clamp(1.02rem,1.25vw,1.14rem);color:var(--ink2);max-width:33em}
 .demo-note{margin-top:12px;font-size:.88rem;color:var(--ink2)}
+.demo-link{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.live{display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:var(--leaf);animation:livepulse 2s ease-out infinite}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(28,117,80,.5)}100%{box-shadow:0 0 0 8px rgba(28,117,80,0)}}
+@media (prefers-reduced-motion:reduce){.live{animation:none}}
 .cta-row{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
 
 /* stage: the dark surface the product is shown on */
