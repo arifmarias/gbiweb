@@ -428,8 +428,6 @@ details[open]::details-content{block-size:auto}
 /* wide screens */
 @media (min-width:1240px){
   h1{font-size:clamp(4.2rem,6.4vw,7rem)}
-  .hero-head{grid-template-columns:minmax(0,1fr) 29rem;gap:48px;align-items:end}
-  .hero-sub{padding-bottom:.5rem}
 }
 @media (min-width:1100px){
   .hero-stage{grid-template-columns:minmax(0,1fr) clamp(250px,23vw,310px)}
